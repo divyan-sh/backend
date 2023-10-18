@@ -1,0 +1,59 @@
+$ MongoDB and Node.js Connection:
+
+-Step.1
+ To connect MDB with node.js application You need a driver to access Mongo from within a Node application. There are a number of Mongo drivers available, but MongoDB is among the most popular. To install the MongoDB module, run the below command
+ > npm install mongodb
+
+-Step.2
+ Creating and closing a connection to a MongoDB database. 
+ > const database_name = "Employee";
+ > const MongoClient = require('mongodb).MongoClient;
+ > const url = `mongodb://localhost/${database_name}`;
+
+ > MongoClient.connect(url,(err,db) =>{
+ >     if (err) throw err;    
+ >     console.log("Connected");
+ >     db.close();
+ > });
+
+ +1.The first step is to include the mongodb module, which is done through the require function. Once this module is in place, we can use the necessary functions available in this module to create connections to the database.
+
+ +2.Next, we specify our connection string to the database. In the connect string, there are 3 key values which are passed.
+    The first is 'mongodb' which specifies that we are connecting to a mongoDB database.
+    The next is 'localhost' which means we are connecting to a database on the local machine.
+    The next is 'EmployeeDB' which is the name of the database defined in our MongoDB database.
+
+ +3.The next step is to actually connect to our database. The connect function takes in our URL and has the facility to specify a callback function. It will be called when the connection is opened to the database. This gives us the opportunity to know if the database connection was successful or not.
+
+ +4.In the function, we are writing the string "Connection established" to the console to indicate that a successful connection was created.
+
+ +5.Finally, we are closing the connection using the db.close statement.
+
+$ A More Proper Code of DataBase Connection is:
+  > const { MongoClient } = require("mongodb");
+  > 
+  > // Connection URI
+  > const uri =
+  >   "mongodb+srv://sample-hostname:27017/?poolSize=20&w=majority";
+  > 
+  > // Create a new MongoClient
+  > const client = new MongoClient(uri);
+  > 
+  > async function run() {
+  >   try {
+  >     // Connect the client to the server
+  >     await client.connect();
+  > 
+  >     // Establish and verify connection
+  >     await client.db("admin").command({ ping: 1 });
+  >     console.log("Connected successfully to server");
+  >   } finally {
+  >     // Ensures that the client will close when you finish/error
+  >     await client.close();
+  >   }
+  > }
+  > run().catch(console.dir);
+
+# So, in this way you can connect and access MongoDB database.
+
+$ Mongoose--> Mongoose is a very popular ODM for MongoDB in Node.js. Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more.

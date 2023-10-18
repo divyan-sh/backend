@@ -1,0 +1,63 @@
+$ What is Rest API ?
+Before that let's understand what is API..
+
+# WHAT IS API?
+> API is the acronym for Application Programming Interface, which is a software intermediary that allows two applications to talk to each other. Each time you use an app like Facebook, send an instant message, or check the weather on your phone, you’re using an API.
+
+so this is Kitabi definition, it is correct but let us define this in our way..
+
++ So API's are the code that written to programmatically interact with a separate software component or resource.
+
++ API's are nothing but a code that is written to handle the request and to send to requested response..
+
++ API's are just a transport system on the web..using the API's we get all our data from a server.
+
++ An API is a set of programming code that enables data transmission between one software product and another. It also contains the terms of this data exchange.
+
++ Normally when u request some resources from a server and in return server respond you with the required resources this happens because at server a code is written (this code is a API) in that code it is written that if this particular request comes at server then you have to respond with this particular resources..
+
+Now Rest API-->
+# Representational State Transfer (REST): The term REST was introduced by computer scientist Roy Fielding in a dissertation in 2000. Unlike SOAP, which is a protocol, REST is a software architectural style with six constraints for building applications that work over HTTP, often web services. The World Wide Web is the most common realization and application of this architecture style.
+
+oR
+
+$ REST or RESTful stands for REpresentational State Transfer. It is an architectural style as well as an approach for communications purposes that is often used in various web services development. In simpler terms, it is an application program interface (API) that makes use of the HTTP requests to GET, PUT, POST and DELETE the data over WWW.
+
+REST is considered a simpler alternative to SOAP, which many developers find difficult to use because it requires writing a lot of code to complete every task and following the XML structure for every message sent. 
+
+REST uses HTTP request to transfer the data between different applications
+
+>> REST follows another logic since it makes data available as resources. Each resource is represented by a unique URL, and one can request this resource by providing its URL.
+
+>> Web APIs that comply with REST architectural constraints are called RESTful APIs. These APIs use HTTP requests (AKA methods or verbs) to work with resources: GET, PUT, HEAD, POST, PATCH, CONNECT, TRACE, OPTIONS and DELETE.
+
+>> RESTful systems support messaging in different formats, such as plain text, HTML, YAML, XML, and JSON, while SOAP only allows XML. The ability to support multiple formats for storing and exchanging data is one of the reasons REST is a prevailing choice for building public APIs these days.
+
+APIs are RESTful as long as they comply with the 6 guiding constraints of a RESTful system:
+Well, there are six ground principles laid down by Dr. Fielding who was the one to define the REST API design in 2000. Below are the six guiding principles of REST:
+
+-1.Stateless: 
+Requests sent from a client to the server contains all the necessary information that is required to completely understand it. It can be a part of the URI, query-string parameters, body, or even headers. The URI is used for uniquely identifying the resource and the body holds the state of the requesting resource. Once the processing is done by the server, an appropriate response is sent back to the client through headers, status or response body.
+
+-2.Client-Server:
+It has a uniform interface that separates the clients from the servers. Separating the concerns helps in improving the user interface’s portability across multiple platforms as well as enhance the scalability of the server components.
+
+-3.Uniform Interface:
+To obtain the uniformity throughout the application, REST has defined four interface constraints which are:
+Resource identification
+Resource Manipulation using representations
+Self-descriptive messages
+Hypermedia as the engine of application state
+
+-4.Cacheable:
+In order to provide a better performance, the applications are often made cacheable. It is done by labeling the response from the server as cacheable or non-cacheable either implicitly or explicitly. If the response is defined as cacheable, then the client cache can reuse the response data for equivalent responses in the future. It also helps in preventing the reuse of the stale data.
+
+-5.Layered system:
+The layered system architecture allows an application to be more stable by limiting component behavior.  This architecture enables load balancing and provides shared caches for promoting scalability. The layered architecture also helps in enhancing the application’s security as components in each layer cannot interact beyond the next immediate layer they are in.
+
+-6.Code on demand:
+Code on Demand is an optional constraint and is used the least. It permits a clients code or applets to be downloaded and extended via the interface to be used within the application. In essence, it simplifies the clients by creating a smart application which doesn’t rely on its own code structure.
+
+$..These 6 constraints make a simple API into a RESTful API..
+Don't learn them by Heart
+Just remember RestFull api do not have to think about UI and sessions..

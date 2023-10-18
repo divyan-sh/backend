@@ -1,0 +1,119 @@
+$ WE already seen the traditional way of connecting node.js applications with our monoDB database but there is one more way to do that..
+  i.e using a Framework yes u heard it right there is a Framework of MongoDb that makes your code even shorter and much more cleaner.
+
+There are two common approaches for interacting with a database: 
+-1. Using the databases' native query language (e.g. SQL)
+-2. Using an Object Data Model ("ODM") or an Object Relational Model ("ORM"). An ODM/ORM represents the website's data as JavaScript objects, which are then mapped to the underlying database. Some ORMs are tied to a specific database, while others provide a database-agnostic backend.
+
+#Mongoose: Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
+ It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB.
+
+ Some Terminologies before getting into Mongoose:
+
+ -Schema: While Mongo is schema-less, SQL defines a schema via the table definition. A Mongoose ‘schema’ is a document data structure (or shape of the document) that is enforced via the application layer.
+
+ -Models: ‘Models’ are higher-order constructors that take a schema and create an instance of a document equivalent to records in a relational database.
+
+# The three main advantages of using Mongoose versus native MongoDB are:
+  - MongooseJS provides an abstraction layer on top of MongoDB that eliminates the need to use named collections.
+  - Models in Mongoose perform the bulk of the work of establishing up default values for document properties and validating data.
+  - Functions may be attached to Models in MongooseJS. This allows for seamless incorporation of new functionality.
+  - Queries use function chaining rather than embedded mnemonics which result in code that is more flexible and readable, therefore more maintainable as well.
+
+# Mongoose uses schemas to model the data an application wishes to store and manipulate in MongoDb. This includes features such as type casting, validation, query building, and more.
+  - The schema describes the attributes of the properties (aka fields) the application will manipulate. These attributes include such things as:
+  Data type (e.g. String, Number, etc.).
+  Whether or not it is required or optional.
+  Is it’s value unique, meaning that the database is allowed to contain only one document with that value in that property.
+
+  - A model is generated from the schema and defines a document the application will operating on. More precisely, a model is a class that defines a document with the properties and behaviors as declared in our schema. All database operations performed on a document using Mongoose must reference a model.
+
+# Difference between Mongoose and MonoDb
+  -1. The first difference between a Mongoose and a native-MongoDB application is that a module containing the schema and model must be created in the models directory.
+  The schema definition is quite interesting and useful since it can specify attributes of each property including data type, whether it is required or optional on an insert or update, and whether its value is unique or not.
+  + A best practice is for this file to have the same name as the model. The first character of this file is in uppercase since a model is a class built from the schema. Like any class it’s first character should therefore be an uppercase letter.
+  For our example the following file, Account.js, contains the Mongoose schema and model definitions.
+    // Mongoose schema and model definitions
+  > const mongoose = require(‘mongoose’);
+  > const Schema = mongoose.Schema;
+    // Create the schema for the Account database
+  > const accountSchema = new Schema({
+  >   account_no: { type: Number, required: true, unique: true },  
+  >   owner_fname: { type: String, required: true, unique: false },
+  >   owner_mi: { type: String, required: true, unique: false },
+  >   owner_lname: { type: String, required: true, unique: false },
+  >   created_on: { type: Date, required: false, unique: false },
+  >   updated_on: { type: Date, required: false, unique: false },
+  > });
+    // Create a model for the schema
+  > const Account = mongoose.model(‘Account’, accountSchema);
+  > module.exports = Account;
+
+  -2. The second major difference, although arguably relative to each developer, is that queries are easier to construct and read in Mongoose than in native-MongoDb. MongoDB queries consist of structured BSON specifying document property names, operators, and values, which together specify how documents are to be filtered.
+
+  An example of a MongoDB query that selects documents where the owner_fname is equal (“$eq”) to a value of “Roger” is shown below.
+  > collection.find({ owner_fname: { $eq: ‘Roger’ } });
+  
+  Compare this to Mongoose which uses the combination of functions and function chaining, rather than operators to filter documents. Although longer than its MongoDB equivalent the Mongoose version of the query is clearer to the reader and can end up being shorter as queries become more complex and more properties are required in the BSON.
+  > const query = Account.find({}).where(‘owner_fname’).equals(‘Roger’);
+  > query.exec();
+
+? SO let's see how we can connect to monoDB using Mongoose..
+  There are many different syntax to connect to a database but few steps are common in all of them first is to require the module and second is to connect to the database using connect() method.
+
+  > const mongoose = require('mongoose')
+  > const server_name = "127.0.0.01";
+  > const database_name = "testData";
+   // The connect method return a promise hence we have to handle using async await or then & catch
+   // These two fields are specify because of deprecated warnings
+   // if the database you sepecified is not available then this method will create a new database of the name you specified.
+  > mongoose.connect('mongodb://${server_name}/${database_name}', {useNewUrlParser: true, useUnifiedTopology:true})
+  > .then(()=>{
+  >     console.log("Connection Successful");
+  > })
+  > .catch((err)=>{
+  >     throw err;
+  > })
+  > 
+
+  So this is the way for connecting our MongoDB with Node.js using Mongoose.
+
+? Way:2
+  // getting-started.js
+  > const mongoose = require('mongoose');
+  > mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology:true});
+  // We have a pending connection to the test database running on localhost. We now need to get notified if we connect successfully or if a connection error occurs:
+  > const db = mongoose.connection;
+  > db.on('error', console.error.bind(console, 'connection error:'));
+  > db.once('open', function() {
+  >   // we're connected!
+  > });x`
+
+? Way:3 using a Class
+  Create a file ./src/database.js under the project root.
+  Next, we will add a simple class with a method that connects to the database.
+  > let mongoose = require('mongoose');
+  
+  > const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
+  > const database = 'fcc-Mail';      // REPLACE WITH YOUR DB NAME
+  
+  > class Database {
+  >   constructor() {
+  >     this._connect()
+  >   }
+  > _connect() {
+  >      mongoose.connect(`mongodb://${server}/${database}`)
+  >        .then(() => {
+  >          console.log('Database connection successful')
+  >        })
+  >        .catch(err => {
+  >          console.error('Database connection error')
+  >        })
+  >   }
+  > }
+
+  > module.exports = new Database()
+
+  The require(‘mongoose’) call above returns a Singleton object. It means that the first time you call require(‘mongoose’), it is creating an instance of the Mongoose class and returning it. On subsequent calls, it will return the same instance that was created and returned to you the first time because of how module import/export works in ES6.
+
+  Similarly, we have turned our Database class into a singleton by returning an instance of the class in the module.exports statement because we only need a single connection to the database.

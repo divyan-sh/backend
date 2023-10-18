@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+    <section class="blogs-section">
+      <div class="container blur-bg">
+        <div class="heading">
+          <h2>All BLOGS:</h2>
+        </div>
+        <div class="hr"></div>
+        <% blogs.forEach(blog=> { %>
+        <div class="blog">
+          <h3><%= blog.title %></h3>
+          <p><%= blog.snippet %></p>
+        </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>

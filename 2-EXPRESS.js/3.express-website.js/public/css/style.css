@@ -1,0 +1,549 @@
+@import url(fonts.css);
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+
+/* #Variables */
+
+:root {
+    /* Theme: font-family */
+    --Abel: "Abel", cursive;
+    --Anton: "Anton", cursive;
+    --Josefin: "Josefin", cursive;
+    --Lexend: "Lexend", cursive;
+    --Livvic: "Livvic", cursive;
+    /* Themes colors */
+    --text-gray: #3f4954;
+    --text-light: #686666da;
+    --bg-color: #0f0f0f;
+    --white: #ffffff;
+    --midnight: #104f55;
+    /* Gradient Color */
+    --sky: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+
+/* > --------------------- Global Classes --------------------- > */
+
+a {
+    text-decoration: none;
+    color: var(--text-gray);
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+}
+
+h1 {
+    font-family: var(--Lexend);
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.7rem;
+    font-family: var(--Lexend);
+}
+
+h3 {
+    font-family: var(--Abel);
+    font-size: 1.3rem;
+}
+
+button.btn {
+    outline: none;
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    font-family: var(--Livvic);
+    cursor: pointer;
+}
+
+span {
+    font-family: var(--Abel);
+}
+
+.container {
+    margin: 0 5vw;
+}
+
+.text-gray {
+    color: var(--text-gray);
+}
+
+p {
+    font-family: var(--Lexend);
+    color: var(--text-light);
+}
+
+
+/* > ----------X---------- Global Classes ----------X---------- > */
+
+
+/* --------------------- navbar --------------------- */
+
+.nav-bar {
+    background: #fff;
+    padding: 0rem 2rem;
+    height: 0rem;
+    min-height: 10vh;
+    overflow: hidden;
+    transition: height 1s ease-in-out;
+}
+
+.nav-bar .nav-menu {
+    justify-content: space-between;
+}
+
+.nav-bar .nav-brand a {
+    display: inline-block;
+    font-size: 1.7rem;
+    padding: 1.1rem 0;
+    font-family: var(--Lexend);
+}
+
+
+/* Hamburger */
+
+.nav-bar .toggle-collapse {
+    /* background: #000; */
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 90%;
+}
+
+.nav-bar .toggle-collapse .toggle-icon {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.9rem 1rem 1rem 1rem;
+}
+
+.nav-bar .toggle-collapse .toggle-icon i {
+    /* font-size: 1.5rem; */
+    cursor: pointer;
+    color: var(--text-gray);
+}
+
+.collapse {
+    height: 40rem;
+}
+
+.nav-bar .nav-items {
+    display: flex;
+}
+
+.nav-items .nav-link {
+    text-align: center;
+    padding: 1.6rem 1rem;
+    font-size: 1.3rem;
+    position: relative;
+    font-family: var(--Abel);
+}
+
+.nav-items .nav-link:hover {
+    background: var(--midnight);
+}
+
+.nav-items .nav-link:hover a {
+    color: var(--white);
+}
+
+.nav-bar .social {
+    padding: 1.4rem 0;
+}
+
+.nav-bar .social i {
+    padding: 0.3rem;
+    font-size: 1.4rem;
+}
+
+.nav-bar .social i:hover {
+    color: #a1c4cf;
+}
+
+
+/* ----------X---------- navbar ----------X----------*/
+
+
+/* -> --------------------- Main-Content --------------------- -> */
+
+
+/* >>>>>>>>>>>>> Landing Page >>>>>>>>>>>>> */
+
+main .landing-page {
+    background: url(../assets/Background-image.png);
+    background-size: cover;
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+}
+
+main .landing-page .site-bg {
+    padding-top: 12rem;
+    text-align: center;
+    color: var(--white);
+}
+
+main .landing-page h1,
+main .landing-page h3 {
+    margin: 0.3rem;
+}
+
+main .landing-page .btn {
+    margin: 1.8rem;
+    background: var(--sky);
+    color: var(--text-gray);
+}
+
+main .landing-page .btn:hover {
+    background: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+}
+
+
+/* >>>>> X >>>>> Landing Page >>>>> X >>>>> */
+
+
+/* >>>>>>>>>>>>> Blog Carousel >>>>>>>>>>>>> */
+
+main .blog-carousel {
+    background: url(../assets/Abract01.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 65%;
+    height: 100vh;
+    width: 100%;
+}
+
+
+/* Still u will not able to see the carousel becoz we didn't call the owl-carousel fn using jquery >> */
+
+
+/* Adding some custom styles to the carousel */
+
+main .blog-carousel .blog-post {
+    padding-top: 6rem;
+}
+
+main .blog-carousel .blog-post .blog-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 78%;
+    margin: 3rem 2rem;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+}
+
+main .blog-content .blog-title {
+    padding: 2rem 0;
+}
+
+main .blog-content .btn-blog {
+    padding: 0.7rem 2rem;
+    background: var(--sky);
+    margin: 0.5rem;
+    color: var(--text-gray);
+}
+
+main .blog-content span {
+    display: block;
+}
+
+.blog-carousel .container .owl-nav {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/* Now to modify the nav-links of the carousel u need to use some default to class to reach it and then add some custom styles */
+
+.owl-nav .owl-prev .owl-nav-prev,
+.owl-nav .owl-next .owl-nav-next {
+    color: var(--text-gray);
+    background: transparent;
+    font-size: 2.3rem;
+}
+
+
+/* here also to change hover effect u can't just directly target the ur element u need to reach it through owl themes */
+
+.owl-theme .owl-nav [class*="owl-"]:hover {
+    background: transparent;
+    color: var(--midnight);
+}
+
+.owl-theme .owl-nav [class*="owl-"] {
+    outline: none;
+}
+
+
+/* >>>>> X >>>>> Blog Carousel >>>>> X >>>>> */
+
+
+/* >>>>>>>>>>>>> Main Site content >>>>>>>>>>>>> */
+
+main .site-content {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+main .post-content {
+    width: 100%;
+}
+
+main .site-content .post-content>.post-img,
+.post-title {
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+main .site-content .post-content>.post-img .post-info {
+    background: var(--sky);
+    padding: 1rem;
+    position: absolute;
+    bottom: 0%;
+    left: 18vw;
+    border-radius: 3rem;
+}
+
+main .site-content .post-content>.post-img>div {
+    overflow: hidden;
+}
+
+main .site-content .post-content>.post-img .img {
+    transition: 1s ease;
+    width: 100%;
+}
+
+main .site-content .post-content>.post-img .img:hover {
+    transform: scale(1.3);
+}
+
+main .site-content .post-content>.post-img .post-info span {
+    margin: 0.5rem;
+}
+
+main .post-content .post-title a {
+    font-family: var(--Anton);
+    font-size: 1.5rem;
+}
+
+main .post-content .post-title p {
+    margin: 0.8rem 0;
+}
+
+main .post-content .post-title .post-btn {
+    border-radius: 0;
+    padding: 0.7rem 1.5rem;
+    background: var(--sky);
+}
+
+main .site-content .pagination {
+    justify-content: center;
+    color: var(--text-gray);
+    margin: 4rem 0;
+}
+
+main .site-content .pagination a {
+    padding: 0.6rem 0.9rem;
+    border-radius: 2rem;
+    margin: 0 0.3rem;
+    font-family: var(--Lexend);
+}
+
+main .site-content .pagination a.pages {
+    background: var(--text-gray);
+    color: var(--white);
+}
+
+
+/* >>>>> X >>>>> Main Site content >>>>> X >>>>> */
+
+
+/* >>>>>>>>>>>>> SideBar >>>>>>>>>>>>> */
+
+main .site-content>.sidebar .category-list {
+    padding: 0.8rem 1.3rem;
+    font-family: var(--Livvic);
+}
+
+main .site-content>.sidebar .category-list .list-item {
+    background: var(--sky);
+    padding: 0.4rem 1rem;
+    margin: 0.8rem 0;
+    border-radius: 3rem;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .site-content .sidebar .popular-post .post-content {
+    padding: 1rem 0;
+}
+
+main .site-content .sidebar .popular-post h2 {
+    padding-top: 8rem;
+}
+
+main .site-content .sidebar .popular-post .post-info {
+    /* To override the previous css property */
+    padding: 0.4rem 0.1rem !important;
+    bottom: 0rem !important;
+    left: 1.5rem !important;
+    border-radius: 0rem !important;
+    background: var(--white) !important;
+}
+
+main .site-content .sidebar .popular-post .post-title a {
+    font-size: 1rem !important;
+}
+
+main .site-content .sidebar .newsletter {
+    padding-top: 10rem;
+}
+
+main .site-content .sidebar .newsletter .form-element {
+    padding: 1rem 2rem;
+}
+
+main .site-content .sidebar .newsletter .form-element .inp-element {
+    width: 90%;
+    height: 2.9rem;
+    padding: 0.4rem 1rem;
+    font-family: var(--Lexend);
+    font-size: 1rem;
+}
+
+main .site-content .sidebar .newsletter .form-btn {
+    align-self: center;
+    border-radius: 0;
+    padding: 0.9rem 34%;
+    margin: 1rem 0;
+    background: var(--sky);
+}
+
+main .site-content .sidebar .popular-tags {
+    padding: 5rem 0;
+}
+
+main .site-content .sidebar .popular-tags .tags {
+    padding: 1rem 0.3rem;
+}
+
+main .site-content .sidebar .popular-tags .tags .tag {
+    background: var(--sky);
+    padding: 0.4rem 1rem;
+    border-radius: 3rem;
+    margin: 0.5rem 0.8rem;
+}
+
+
+/* >>>>> X >>>>> SideBar >>>>> X >>>>> */
+
+
+/* -> ----------X---------- Main-Content ----------X---------- -> */
+
+
+/* -> --------------------- Footer --------------------- -> */
+
+footer.footer {
+    height: 100%;
+    background: var(--bg-color);
+    position: relative;
+}
+
+footer.footer .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+footer.footer .container>div {
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 3rem 0.9rem;
+}
+
+footer.footer .container h2 {
+    color: var(--white);
+}
+
+footer.footer p {
+    margin: 1rem 0;
+    text-align: justify;
+}
+
+footer.footer .newsletter .form-element {
+    background: var(--bg-color);
+    display: inline-block;
+}
+
+footer.footer .newsletter .form-element .inp-element {
+    padding: 0.6rem 0.8rem;
+    border: none;
+    outline: none;
+    /* background: transparent; */
+    color: var(--white);
+    font-family: var(--Josefin);
+    font-size: 1rem;
+    width: 74%;
+}
+
+footer.footer .newsletter .form-element span {
+    background: var(--sky);
+    padding: 0.4rem 0.7rem 0.6rem 0.7rem;
+    cursor: pointer;
+}
+
+footer.footer .instagram div>img {
+    display: inline-block;
+    width: 25%;
+    height: 50%;
+    margin: 0.3rem 0.4rem;
+}
+
+footer.footer .follow div>i {
+    cursor: pointer;
+    color: var(--white);
+    padding: 0 0.4rem;
+}
+
+footer.footer .copyright {
+    justify-content: center;
+    font-family: var(--Josefin)
+}
+
+footer.footer .copyright a {
+    color: var(--white);
+}
+
+footer.footer .move-up {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+}
+
+footer.footer .move-up i {
+    cursor: pointer;
+    color: var(--midnight);
+    transition: 0.5s ease;
+}
+
+footer.footer .move-up i:hover {
+    color: var(--white);
+}
+
+
+/* -> ----------X---------- Footer ----------X---------- -> */

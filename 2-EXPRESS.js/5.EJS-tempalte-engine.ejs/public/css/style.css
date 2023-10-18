@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #eee;
+  position: relative;
+  background: url(../assets/bg4.jpg) no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-attachment: fixed;
+  /* min-height: 100vh; */
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.logo h1 {
+  font-size: 3rem;
+}
+
+.logo p {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  margin-top: -0.7rem;
+  margin-left: 0.4rem;
+  letter-spacing: 0.1rem;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.nav-link {
+  margin: 0 1rem;
+}
+.nav-link a {
+  color: #fff !important;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.nav-link a:hover {
+  color: #000 !important;
+}
+
+.hr {
+  background-color: #000;
+  height: 1px;
+  width: 95%;
+  margin: auto;
+}
+
+.home {
+  min-height: 82vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home .intro {
+  padding: 2rem;
+  /* background-color: #6c757dcb; */
+}
+
+.blur-bg {
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+}
+
+.blogs-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 82vh;
+}
+
+.blogs-section .container {
+  padding: 2rem;
+}
+
+.blogs-section .container .heading {
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+
+.blogs-section .container .blog {
+  padding: 0.5rem;
+  margin: 1rem 0;
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  background-color: rgba(255, 255, 255, 0.226);
+  border-radius: 10px;
+}

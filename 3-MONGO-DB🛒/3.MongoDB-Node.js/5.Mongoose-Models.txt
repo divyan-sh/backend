@@ -1,0 +1,65 @@
+
+# What is Models:
+  -Models are fancy constructors compiled from Schema definitions. An instance of a model is called a document. Models are responsible for creating and reading documents from the underlying MongoDB database.
+  -Models are used to create collection in database and the instance of model create document in that collection.
+  -So a Model is a wrapper on the mongoose schema..
+  -We will use Model instance to interact with our database and as our model is wrap up our schema hence we can only allow to play with the data according to the rules which we define in our schema.
+  Hence Model provide a interface to the database for creating,querying,updating,deleting records etc.
+  To use our schema definition, we need to convert our Schema into a Model we can work with.To do so, we pass it into mongoose.model(modelName, schema):
+  
+  > const Blog = mongoose.model("Blog",blogSchema);
+  The first argument is the singular name of the collection your model is for. Mongoose automatically looks for the plural, lowercased version of your model name. Thus, for the example above, the model Blog is for the blogs collection in the database.
+  
+  Note: The .model() function makes a copy of schema. Make sure that you've added everything you want to schema, including hooks, before calling .model()!
+
+? When you call mongoose.model() on a schema, Mongoose compiles a model for you.
+  > const schema = new mongoose.Schema({ name: 'string', size: 'string' });
+  > const Tank = mongoose.model('Tank', schema);
+
+# Constructing a Document:
+  An instance of a model is called a document. Creating them and saving to the database is easy.
+  > const Tank = mongoose.model('Tank', yourSchema);
+
+  > const small = new Tank({ size: 'small' });
+  > small.save(function (err) {
+  >   if (err) return handleError(err);
+  >   // saved!
+  > });
+  // or
+  > Tank.create({ size: 'small' }, function (err, small) {
+  >   if (err) return handleError(err);
+  >   // saved!
+  > });
+  // or, for inserting large batches of documents
+  > Tank.insertMany([{ size: 'small' }], function(err) {
+  > 
+  > });
+  Note: that no tanks will be created/removed until the connection your model uses is open. Every model has an associated connection. When you use mongoose.model(), your model will use the default mongoose connection.
+
+  * whenever we insert a document with any of the above method the method return a promise to us...
+
+# Handling Promise..
+  -Way One:
+  > const medium = new Tank({size:"Medium"});
+  > medium.save()
+  > .then(()=>{
+  >   console.log("Save Successfully");
+  > })
+  > .catch((err)=>{
+  >   console.log(`Error in saving the doc: ${err.message}`);
+  > })
+  
+  -Way Two:
+   > const createDocument = async (doc) =>{
+   >  try {
+   >  const doc = new Tank(doc);
+   >  const result= await doc.save();
+   >  console.log(result);
+   ? the save() method return the document which we store.
+   >  }
+   >  catch(err) {
+   >  console.log(err.message);
+   >  }
+   > }
+   > createDocument({size:"Large"})
+  

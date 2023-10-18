@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%-
+    include("./partials/nav.ejs",{home:false,create:false,read:true,update:false,del:false})
+    %>
+    <div class="container">
+      <h2 class="mb-3 mt-3">Search Playlist</h2>
+      <div class="row">
+        <div class="col-6"><%- include("./partials/readForm.ejs")%></div>
+        <div class="col-6">
+          <p class="form-text result-text">
+            Your Search Result Will Be Appear Here...
+          </p>
+          <div class="all-playlists mt-3">
+            <!-- Here comes the resulted playlist -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <%- include("./partials/scripts.ejs",{script:"read"})%>
+  </body>
+</html>

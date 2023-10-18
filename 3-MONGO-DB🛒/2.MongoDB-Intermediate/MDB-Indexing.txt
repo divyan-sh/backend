@@ -1,0 +1,83 @@
+$ MongoDB Indexing
+> Indexes support the efficient resolution of queries. Without indexes, MongoDB must scan every document of a collection to select those documents that match the query statement. This scan is highly inefficient and require MongoDB to process a large volume of data.
+
+> Indexes are special data structures, that store a small portion of the data set in an easy-to-traverse form. The index stores the value of a specific field or set of fields, ordered by the value of the field as specified in the index.
+
+> Indexes in SQL programming are nothing but a special data structure used to easily and quickly locate the record in a given table of the database without being required to traverse through each and every record of the table. Indexes are easily generated using one or more columns of a given table. As a note, the data structure used by an index is a Binary Tree (B-Tree).
+
+> In MongoDB, indexes plays a vital role in efficiently execution of the queries. Basically, if no index is defined in MongoDB, then it has to scan every document of a given collection. Hence, MongoDB uses index to reduce the number of documents to be scanned in a given collection. In fact, MongoDB's index is more or less similar to the indexes used in other relational databases.
+
+> The fact is that the MongoDB defines the indexes at the collection level and supports indexing on any fields in a MongoDB collection.
+
+# Default Index in MongoDB: 
+- Mongodb provides a default index named _id which acts as a primary key to access any document in a collection. This _id index basically avoids the insertion of 2 documents with the same value for the _id field.
+
+# The The createIndex() Method: 
+? db.COLLECTION_NAME.createIndex({KEY:1},<options>)
+  Here key is the name of the field on which you want to create index and 1 is for ascending order. To create index in descending order you need to use -1.
+
+- The db.collection.createIndex method only creates an index if an index of the same specification does not already exist.
+
+- Index Names,
+  The default name for an index is the concatenation of the indexed keys and each key’s direction in the index ( i.e. 1 or -1) using underscores as a separator. For example, an index created on { item : 1, quantity: -1 } has the name item_1_quantity_-1.
+  
+- You can create indexes with a custom name, 
+  such as one that is more human-readable than the default. For example, consider an application that frequently queries the products collection to populate data on existing inventory. The following createIndex() method creates an index on item and quantity named query for inventory:
+  > db.products.createIndex(
+  >     { item: 1, quantity: -1},
+  >     {name: "query for inventory"}
+  > )
+  + You can view index names using the db.collection.getIndexes() method. You cannot rename an index once created. Instead, you must drop and re-create the index with a new name.
+
+
+? This method also accepts list of options (which are optional). Following is the list −
+
+@ background	        Boolean	    Builds the index in the background so that building an index does not block other database activities. Specify true to build in the background. The default value is false.
+
+@ unique	            Boolean	    Creates a unique index so that the collection will not accept insertion of documents where the index key or keys match an existing value in the index. Specify true to create a unique index. The default value is false.
+
+@ name	                string	    The name of the index. If unspecified, MongoDB generates an index name by concatenating the names of the indexed fields and the sort order.
+
+@ sparse	            Boolean	    If true, the index only references documents with the specified field. These indexes use less space but behave differently in some situations (particularly sorts). The default value is false.
+
+@ expireAfterSeconds	integer	    Specifies a value, in seconds, as a TTL to control how long MongoDB retains documents in this collection.
+
+@ weights	            document	The weight is a number ranging from 1 to 99,999 and denotes the significance of the field relative to the other indexed fields in terms of the score.
+
+@ default_language	    string	    For a text index, the language that determines the list of stop words and the rules for the stemmer and tokenizer. The default value is English.
+
+@ language_override	    string	    For a text index, specify the name of the field in the document that contains, the language to override the default language. The default value is language.
+
+# Type of Index..
+
+-1.Single Field: In addition to the MongoDB-defined _id index, MongoDB supports the creation of user-defined ascending/descending indexes on a single field of a document.
+
+-2.Compound Index: MongoDB also supports user-defined indexes on multiple fields, i.e. compound indexes.
+ The order of fields listed in a compound index has significance. For instance, if a compound index consists of { userid: 1, score: -1 }, the index sorts first by userid and then, within each userid value, sorts by score.
+
+-3.Multikey Index: MongoDB uses multikey indexes to index the content stored in arrays. 
+ If you index a field that holds an array value, MongoDB creates separate index entries for every element of the array. These multikey indexes allow queries to select documents that contain arrays by matching on element or elements of the arrays. MongoDB automatically determines whether to create a multikey index if the indexed field contains an array value; you do not need to explicitly specify the multikey type.
+
+-4.Geospatial index: Used to support the queries required for the geospatial coordinate data.
+
+-5.Text index: This index is used to search for a string content in a collection.
+
+-6.Hashed index: Used for hash based Sharding.
+
+# The dropIndex() method 
+  You can drop a particular index using the dropIndex() method of MongoDB.
+  > db.COLLECTION_NAME.dropIndex({KEY:1})
+
+# The dropIndexes() method
+  This method deletes multiple (specified) indexes on a collection.
+  > db.COLLECTION_NAME.dropIndexes()
+  Assume we have created 2 indexes in the named mycol collection as shown below −
+  > db.mycol.createIndex({"title":1,"description":-1})
+  Following example removes the above created indexes of mycol −
+  > db.mycol.dropIndexes({"title":1,"description":-1})
+    { "nIndexesWas" : 2, "ok" : 1 }
+
+# The getIndexes() method
+  This method returns the description of all the indexes int the collection.
+  > db.COLLECTION_NAME.getIndexes()
+  

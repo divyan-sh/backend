@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogger</title>
+
+    <!-- Font Awesome Icon Link -->
+    <link rel="stylesheet" href="css/all.css" />
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+
+    <!-- AOS: Library -->
+    <link rel="stylesheet" href="css/aos.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css" />
+</head>
+
+<body>
+    <!-- ------------------------------------------- Navigation-Menu ------------------------------------------- -->
+    <header>
+        <nav class="nav-bar">
+
+            <div class="nav-menu flex-row">
+                <div class="nav-brand">
+                    <a href="# " class="text-gray">Blooger</a>
+                </div>
+                <div class="toggle-collapse">
+                    <div class="toggle-icon">
+                        <i class="fas fa-bars fa-2x"></i>
+                    </div>
+                </div>
+                <div>
+                    <ul class="nav-items">
+                        <li class="nav-link"><a href="#">Home</a></li>
+                        <li class="nav-link"><a href="#">Category</a></li>
+                        <li class="nav-link"><a href="#">Archive</a></li>
+                        <li class="nav-link"><a href="#">Pages</a></li>
+                        <li class="nav-link"><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="social text-gray">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- --------------------X--------------------X- Navigation-Menu -X--------------------X-------------------- -->
+
+    <!-- ------------------------------------------- Main Content Section ------------------------------------------- -->
+    <main>
+        <!-- >>>>>>>>>>>>> First Section: Landing Page >>>>>>>>>>>>> -->
+        <section class="landing-page">
+            <!-- to specify the scrolling animation u need to use data-aos attribute and inside the specify the effect u want to use but before that instantiate aos object in the hs file-->
+            <div class="site-bg" data-aos="fade-up" data-aos-delay="100">
+                <h3>Tours & Travels</h3>
+                <h1>Amazing Place on Earth</h1>
+                <button class="btn">Explore</button>
+            </div>
+        </section>
+        <!-- >>>>> X >>>>> First Section: Landing Page >>>>> X >>>>> -->
+
+        <!-- >>>>>>>>>>>>> Second Section: Blog Carousel >>>>>>>>>>>>> -->
+        <section class="blog-carousel">
+            <div class="container">
+                <!-- Default of class of owl-carousel plugin: 'own-carousel' define a carousel and 'owl-theme' define default stylesets for the carousel -->
+                <div class="owl-carousel owl-theme blog-post">
+                    <!-- to create your carousel item just create div element with ur custom classes -->
+                    <div class="blog-content" data-aos="fade-right" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <img src="assets/Blog-post/post-1.jpg" alt="Post-1" />
+                        <div class="blog-title">
+                            <h3>London Fashion week's continued the evolution</h3>
+                            <button class="btn btn-blog">Fashion</button>
+                            <span>2 minutes</span>
+                        </div>
+                    </div>
+                    <div class="blog-content" data-aos="fade-in" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <img src="assets/Blog-post/post-2.jpg" alt="Post-2" />
+                        <div class="blog-title">
+                            <h3>London Fashion week's continued the evolution</h3>
+                            <button class="btn btn-blog">Fashion</button>
+                            <span>2 minutes</span>
+                        </div>
+                    </div>
+                    <div class="blog-content" data-aos="fade-left" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <img src="assets/Blog-post/post-3.jpg" alt="Post-3" />
+                        <div class="blog-title">
+                            <h3>London Fashion week's continued the evolution</h3>
+                            <button class="btn btn-blog">Fashion</button>
+                            <span>2 minutes</span>
+                        </div>
+                    </div>
+                    <div class="blog-content" data-aos="fade-right" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <img src="assets/Blog-post/post-4.png" alt="Post-4" />
+                        <div class="blog-title">
+                            <h3>London Fashion week's continued the evolution</h3>
+                            <button class="btn btn-blog">Fashion</button>
+                            <span>2 minutes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-navigation">
+                    <span class="owl-nav-prev"><i class="fas fa-long-arrow-alt-left"></i></span>
+                    <span class="owl-nav-next"><i class="fas fa-long-arrow-alt-right"></i></span>
+                </div>
+            </div>
+        </section>
+        <!-- >>>>> X >>>>> Second Section: Blog Carousel >>>>> X >>>>> -->
+
+        <!-- >>>>>>>>>>>>> Third Section: Site Main Content >>>>>>>>>>>>> -->
+        <section class="container">
+            <div class="site-content">
+                <div class="post">
+                    <div class="post-content" data-aos="zoom-in" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <div class="post-img">
+                            <div>
+                                <img src="assets/Blog-post/blog1.png" alt="blog-1" class="img" />
+                            </div>
+                            <div class="post-info flex-row">
+                                <span><i class="fas fa-user text-gray"></i>&nbsp;&nbsp;Admin</span>
+                                <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 14 2020</span>
+                                <span>2 Comments</span>
+                            </div>
+                        </div>
+                        <div class="post-title">
+                            <a href="#">Why should boys have all the fun? It is the women who are making india an
+                                alcohol loving country</a>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla velit veritatis, perferendis modi ad delectus odio facilis reiciendis inventore quo repellat dolor, nam laudantium hic odit? Ratione expedita repudiandae facere qui voluptate molestiae
+                                similique quisquam tempore nostrum, quaerat fugit?
+                            </p>
+                            <button class="btn post-btn">
+                                Read More&nbsp;<i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="post-content" data-aos="zoom-in" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <div class="post-img">
+                            <div>
+                                <img src="assets/Blog-post/blog2.png" alt="blog-1" class="img" />
+                            </div>
+                            <div class="post-info flex-row">
+                                <span><i class="fas fa-user text-gray"></i>&nbsp;&nbsp;Admin</span>
+                                <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 16 2020</span>
+                                <span>7 Comments</span>
+                            </div>
+                        </div>
+                        <div class="post-title">
+                            <a href="#">
+                                Why should boys have all the fun? It is the women who are
+                                making india an alcohol loving country
+                            </a>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla velit veritatis, perferendis modi ad delectus odio facilis reiciendis inventore quo repellat dolor, nam laudantium hic odit? Ratione expedita repudiandae facere qui voluptate molestiae
+                                similique quisquam tempore nostrum, quaerat fugit?
+                            </p>
+                            <button class="btn post-btn">
+                                Read More&nbsp;<i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="post-content" data-aos="zoom-in" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <div class="post-img">
+                            <div>
+                                <img src="assets/Blog-post/blog3.png" alt="blog-1" class="img" />
+                            </div>
+                            <div class="post-info flex-row">
+                                <span><i class="fas fa-user text-gray"></i>&nbsp;&nbsp;Admin</span>
+                                <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 19 2020</span>
+                                <span>5 Comments</span>
+                            </div>
+                        </div>
+                        <div class="post-title">
+                            <a href="#">New data recording system to better analyse road accidents</a>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla velit veritatis, perferendis modi ad delectus odio facilis reiciendis inventore quo repellat dolor, nam laudantium hic odit? Ratione expedita repudiandae facere qui voluptate molestiae
+                                similique quisquam tempore nostrum, quaerat fugit?
+                            </p>
+                            <button class="btn post-btn">
+                                Read More&nbsp;<i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="post-content" data-aos="zoom-in" data-aos-delay="200" data-aos-easing="ease-in-sine">
+                        <div class="post-img">
+                            <div>
+                                <img src="assets/Blog-post/blog4.png" alt="blog-1" class="img" />
+                            </div>
+                            <div class="post-info flex-row">
+                                <span><i class="fas fa-user text-gray"></i>&nbsp;&nbsp;Admin</span>
+                                <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 21 2020</span>
+                                <span>12 Comments</span>
+                            </div>
+                        </div>
+                        <div class="post-title">
+                            <a href="#">New data recording system to better analyse road accidents</a>
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore, nulla velit veritatis, perferendis modi ad delectus odio facilis reiciendis inventore quo repellat dolor, nam laudantium hic odit? Ratione expedita repudiandae facere qui voluptate molestiae
+                                similique quisquam tempore nostrum, quaerat fugit?
+                            </p>
+                            <button class="btn post-btn">
+                                Read More&nbsp;<i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pagination flex-row">
+                        <a href="#"><i class="fas fa-chevron-left"></i></a>
+                        <a href="#" class="pages">1</a>
+                        <a href="#" class="pages">2</a>
+                        <a href="#" class="pages">3</a>
+                        <a href="#"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <!-- ---------- SideBar --------- -->
+                <aside class="sidebar">
+                    <div class="category">
+                        <h2>Category</h2>
+                        <ul class="category-list">
+                            <li class="list-item" data-aos="fade-left" data-aos-delay="100">
+                                <a href="#">SoftWares</a><span>(05)</span>
+                            </li>
+                            <li class="list-item" data-aos="fade-left" data-aos-delay="200">
+                                <a href="#">Technology</a><span>(02)</span>
+                            </li>
+                            <li class="list-item" data-aos="fade-left" data-aos-delay="300">
+                                <a href="#">LifeStyle</a><span>(01)</span>
+                            </li>
+                            <li class="list-item" data-aos="fade-left" data-aos-delay="400">
+                                <a href="#">Shopping</a><span>(07)</span>
+                            </li>
+                            <li class="list-item" data-aos="fade-left" data-aos-delay="500">
+                                <a href="#">Food</a><span>(08)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="popular-post">
+                        <h2>Popular Post</h2>
+                        <div class="post-content" data-aos="flip-up" data-aos-delay="200">
+                            <div class="post-img">
+                                <div>
+                                    <img src="assets/popular-post/m-blog-1.jpg" alt="blog-1" class="img" />
+                                </div>
+                                <div class="post-info flex-row">
+                                    <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 14
+                                        2020</span>
+                                    <span>2 Comments</span>
+                                </div>
+                            </div>
+                            <div class="post-title">
+                                <a href="#">New data recording system to better analyse road accidents</a>
+
+                            </div>
+                        </div>
+                        <div class="post-content" data-aos="flip-up" data-aos-delay="300">
+                            <div class="post-img">
+                                <div>
+                                    <img src="assets/popular-post/m-blog-2.jpg" alt="blog-1" class="img" />
+                                </div>
+                                <div class="post-info flex-row">
+                                    <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 14
+                                        2020</span>
+                                    <span>2 Comments</span>
+                                </div>
+                            </div>
+                            <div class="post-title">
+                                <a href="#">New data recording system to better analyse road accidents</a>
+
+                            </div>
+                        </div>
+                        <div class="post-content" data-aos="flip-up" data-aos-delay="400">
+                            <div class="post-img">
+                                <div>
+                                    <img src="assets/popular-post/m-blog-3.jpg" alt="blog-1" class="img" />
+                                </div>
+                                <div class="post-info flex-row">
+                                    <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 14
+                                        2020</span>
+                                    <span>2 Comments</span>
+                                </div>
+                            </div>
+                            <div class="post-title">
+                                <a href="#">New data recording system to better analyse road accidents</a>
+
+                            </div>
+                        </div>
+                        <div class="post-content" data-aos="flip-up" data-aos-delay="500">
+                            <div class="post-img">
+                                <div>
+                                    <img src="assets/popular-post/m-blog-4.jpg" alt="blog-1" class="img" />
+                                </div>
+                                <div class="post-info flex-row">
+                                    <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 14
+                                        2020</span>
+                                    <span>2 Comments</span>
+                                </div>
+                            </div>
+                            <div class="post-title">
+                                <a href="#">New data recording system to better analyse road accidents</a>
+
+                            </div>
+                        </div>
+                        <div class="post-content" data-aos="flip-up" data-aos-delay="600">
+                            <div class="post-img">
+                                <div>
+                                    <img src="assets/popular-post/m-blog-5.jpg" alt="blog-1" class="img" />
+                                </div>
+                                <div class="post-info flex-row">
+                                    <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;January 14
+                                        2020</span>
+                                    <span>2 Comments</span>
+                                </div>
+                            </div>
+                            <div class="post-title">
+                                <a href="#">New data recording system to better analyse road accidents</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="newsletter" data-aos="fade-up" data-aos-delay="300">
+                        <h2>NewsLetter</h2>
+                        <div class="form-element">
+                            <input type="email" name="email" id="email" placeholder="Email" class="inp-element">
+                            <button class="btn form-btn">Subscribe</button>
+                        </div>
+                    </div>
+                    <div class="popular-tags">
+                        <h2>Popular Tags</h2>
+                        <div class="tags flex-row">
+                            <span class="tag" data-aos="flip-up" data-aos-delay="100">Software</span>
+                            <span class="tag" data-aos="flip-up" data-aos-delay="200">Technology</span>
+                            <span class="tag" data-aos="flip-up" data-aos-delay="300">Travel</span>
+                            <span class="tag" data-aos="flip-up" data-aos-delay="400">Illustration</span>
+                            <span class="tag" data-aos="flip-up" data-aos-delay="500">Design</span>
+                            <span class="tag" data-aos="flip-up" data-aos-delay="600">love</span>
+                            <span class="tag" data-aos="flip-up" data-aos-delay="700">Project</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <!-- -----X----- SideBar -----X----- -->
+            </div>
+        </section>
+        <!-- >>>>> X >>>>> Third Section: Site Main Content >>>>> X >>>>> -->
+    </main>
+    <!-- --------------------X--------------------X- Main Content Section -X--------------------X-------------------- -->
+
+    <!-- ------------------------------------------- Footer of website ------------------------------------------- -->
+    <footer class="footer">
+        <div class="container">
+            <div class="about-us" data-aos="fade-right" data-aos-delay="200">
+                <h2>About-us</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores magnam in quaerat repudiandae quam facere blanditiis eaque modi pariatur neque?</p>
+            </div>
+            <div class="newsletter" data-aos="fade-right" data-aos-delay="200">
+                <h2>Newsletter</h2>
+                <p>Stay update with our latest</p>
+                <div class="form-element">
+                    <input type="email" class="inp-element" placeholder="Email">
+                    <span><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </div>
+            <div class="instagram" data-aos="fade-left" data-aos-delay="200">
+                <h2>Instagram</h2>
+                <div class="flex-row">
+                    <img src="assets/instagram/thumb-card3.png" alt="IG1">
+                    <img src="assets/instagram/thumb-card4.png" alt="IG2">
+                    <img src="assets/instagram/thumb-card5.png" alt="IG3">
+                </div>
+                <div class="flex-row">
+                    <img src="assets/instagram/thumb-card6.png" alt="IG4">
+                    <img src="assets/instagram/thumb-card7.png" alt="IG5">
+                    <img src="assets/instagram/thumb-card8.png" alt="IG6">
+                </div>
+            </div>
+            <div class="follow" data-aos="fade-left" data-aos-delay="200">
+                <h2>Follow-Us</h2>
+                <p>Let us be social</p>
+                <div class="social-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright flex-row">
+            <h4 class="text-gray">
+                Copyright &copy;2020 All rights reserved | made by CloveS, IB:
+                <a href="https://www.youtube.com/watch?v=CrSC1ZA9j0M" target="_blank">
+                    <i class="fab fa-youtube"></i>&nbsp;Daily Tution
+                </a>
+            </h4>
+        </div>
+        <div class="move-up">
+            <span><i class="fas fa-arrow-circle-up fa-2x"></i></span>
+        </div>
+    </footer>
+    <!-- --------------------X--------------------X- Footer of website -X--------------------X-------------------- -->
+
+
+
+    <!-- Jquery Library -->
+    <script src="js/jquery-v3.5.1.min.js"></script>
+
+    <!-- Owl Carousel JS File -->
+    <script src="js/owl.carousel.min.js"></script>
+
+    <!-- AOS: Library -->
+    <script src="js/aos.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

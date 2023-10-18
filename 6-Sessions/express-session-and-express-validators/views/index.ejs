@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express-Session</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Express-Session & Express-Validator</h1>
+      <hr />
+      <div class="response">
+        <% if (success) { %>
+        <p class="success">SuccessFull Validation</p>
+        <% } else { %>
+        <!--  -->
+        <% if (errors) { %>
+        <ul class="error">
+          <% errors.forEach(err => { %>
+          <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+        <% } %> <% } %>
+      </div>
+      <form action="/submit" method="post">
+        <h3>LogIn</h3>
+        <label for="email">Email</label>
+        <input type="text" name="email" />
+        <label for="pass">Password</label>
+        <input type="password" name="pass" />
+        <label for="cnfPass">Confirm Password</label>
+        <input type="password" name="cnfPass" />
+        <input type="submit" class="sub-btn" value="LogIn" />
+      </form>
+    </div>
+  </body>
+</html>

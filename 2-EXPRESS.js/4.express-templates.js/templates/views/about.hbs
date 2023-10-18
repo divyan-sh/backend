@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head}}
+<body>
+  {{> nav}}
+    <div>
+        <h2>{{project.name}} has the following skills:</h2>
+        <ul>
+          {{#each project.skills}}
+            <li>
+               {{this}} 
+            </li>  
+          {{/each}}
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,334 @@
+$ Read Queries...
+
+# db.collection_name.find(query,projection) 
+  This method will display all the documents in a collection in a non-structured way.
+  > db.userInfo.find()
+    { "_id" : ObjectId("5feca41b32682e6fc4db7fc2") }
+    { "_id" : ObjectId("5feca67f32682e6fc4db7fc3"), "name" : "Cnu", "userName" : "cloves", "password" : "cnu@123", "email" : "xyz@gmail.com", "city" : "Indore" }
+    { "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"), "name" : "Divyansh", "userName" : "hey-dev", "password" : "321@123", "email" : "xyz@gmail.com", "city" : "Indore" }
+    { "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"), "name" : "Punit", "userName" : "punit77", "password" : "321@123", "email" : "xyz@gmail.com", "city" : "Indore" }
+    { "_id" : ObjectId("5fecb2da32682e6fc4db7fc6"), "name" : "Shraddha", "userName" : "ilusms", "password" : "321@123", "email" : "xyz@gmail.com", "city" : "dewas" }
+
+  + To display the results in a formatted way, you can use pretty() method.  
+  > db.userInfo.find().pretty()
+    { "_id" : ObjectId("5feca41b32682e6fc4db7fc2") }
+    {
+            "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+            "name" : "Cnu",
+            "userName" : "cloves",
+            "password" : "cnu@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"),
+            "name" : "Divyansh",
+            "userName" : "hey-dev",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"),
+            "name" : "Punit",
+            "userName" : "punit77",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc6"),
+            "name" : "Shraddha",
+            "userName" : "ilusms",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "dewas"
+    }
+
+# db.collection_name.findOne({ key: value})
+  Apart from the find() method, there is findOne() method, that returns only one document.
+  Inside the parameter we have to provide a key and a value on the basis of which it find a document
+  > db.userInfo.findOne({name: "Cnu"})
+    {
+        "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+        "name" : "Cnu",
+        "userName" : "cloves",
+        "password" : "cnu@123",
+        "email" : "xyz@gmail.com",
+        "city" : "Indore"
+    }
+    note: MongoDB is case-sensitive, so be careful while providing the key and value.
+
+    
+$ To query the document on the basis of some condition, you can use following operations.
+
+# Equity condition: find({ <field1>: <value1>, ... },projection)
+  > db.userInfo.find({city:"Indore"}) 
+    -Returns all the documents in which field name matches to "city" and the value matches to "Indore")
+    {
+            "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+            "name" : "Cnu",
+            "userName" : "cloves",
+            "password" : "cnu@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"),
+            "name" : "Divyansh",
+            "userName" : "hey-dev",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"),
+            "name" : "Punit",
+            "userName" : "punit77",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+  > RDBMS: SELECT * FROM userInfo WHERE city = "Indore"
+  ? What is this PROJECTION:
+    so this parameter is show to show the output, for ex if you query show me the documents in which city="Indore" then all the documents with city indore will be shown with all the fields..
+    But if you want to show some specific fields of that particular document then you will use projection.
+    > db.userInfo.find({city: "Indore"},{name:1})
+      -this query will return all the documents where city="Indore" but in that document only the name field will be shown.. if you specify "1" then that field will be shown & if you specify "0" then that field will not shown.
+      { "_id" : ObjectId("5feca67f32682e6fc4db7fc3"), "name" : "Cnu" }
+      { "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"), "name" : "Divyansh" }
+      { "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"), "name" : "Punit" }
+      -By Default _id field will be shown..
+    > db.userInfo.find({city: "Indore"},{_id:0,name:1})
+
+
+
+$ Specify Conditions Using Query Operators:
+
+# db.collection_name.find({ <field1>: { <operator1>: <value1> }, ... })
+  - <operators>
+  + $lt (Less Than)
+  + $lte (Less Than or Equal)
+  + $gt (Greater Than)
+  + $gte (Greater Than or Equal)
+  + $ne (Not Equal)
+  + $in (Values in an Array)
+  + $nin (Not in an Array)
+
+  > db.mycol.find({"likes":{$lt:50}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE likes < 50
+    
+  > db.mycol.find({"likes":{$lte:50}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE likes <= 50
+
+  > db.mycol.find({"likes":{$gt:50}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE likes > 50
+
+  > db.mycol.find({"likes":{$gte:50}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE likes >= 50
+
+  > db.mycol.find({"likes":{$ne:50}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE likes != 50
+
+  > db.mycol.find({"name":{$in:["Raj", "Ram", "Raghu"]}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE name IN ("Raj", "Ram", "Raghu")
+
+  > db.mycol.find({"name":{$nin:["Ramu", "Raghav"]}}).pretty()
+    In RDBMS: SELECT * FROM mycol WHERE NOT IN ("Ramu", "Raghav") 
+
+$ Specify AND Conditions:
+  A compound query can specify conditions for more than one field in the collection’s documents. Implicitly, a logical AND conjunction connects the clauses of a compound query so that the query selects the documents in the collection that match all the conditions.
+
+# db.collection.find({ $and: [ {<key1>:<value1>}, { <key2>:<value2>} ] })
+  > db.userInfo.find({$and:[{city:"Indore"},{name:"Cnu"}]})
+    {
+      "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+      "name" : "Cnu",
+      "userName" : "cloves",
+      "password" : "cnu@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+  + These return all the documents which have city='Indore' AND name='Cnu'
+  OR
+# db.collection.find( { <key1>: <value1>, <key2>:<value2> } )
+  > db.userInfo.find({city:"dewas",name:"Shraddha"}).pretty()
+    {
+      "_id" : ObjectId("5fecb2da32682e6fc4db7fc6"),
+      "name" : "Shraddha",
+      "userName" : "ilusms",
+      "password" : "321@123",
+      "email" : "xyz@gmail.com",
+      "city" : "dewas"
+    }
+  + RDBMS: SELECT * FROM userInfo WHERE city = "dewas" AND name = "Shraddha"  
+
+$ Specify OR Conditions: 
+  Using the $or operator, you can specify a compound query that joins each clause with a logical OR conjunction so that the query selects the documents in the collection that match at least one condition.
+
+# db.collection.find({ $or: [ {<key1>:<value1>}, { <key2>:<value2>} ] })
+  > db.userInfo.find({ $or: [ {name:"Cnu"},{city:"Indore"}]}).pretty()
+    {
+      "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+      "name" : "Cnu",
+      "userName" : "cloves",
+      "password" : "cnu@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+    {
+      "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"),
+      "name" : "Divyansh",
+      "userName" : "hey-dev",
+      "password" : "321@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+    {
+      "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"),
+      "name" : "Punit",
+      "userName" : "punit77",
+      "password" : "321@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+  + These query gives me all the document in which  either the name ="Cnu" OR the city ="Indore".
+  + RDBMS: SELECT * FROM userInfo WHERE city = "Indore" OR name = "Cnu"
+
+$ Specify AND as well as OR Conditions:
+  
+# db.collection.find({<key1>: <value1>,$or: [ {<key1>:<value1>},{<key2>:<value2>} ] })
+  The following example will show the documents that have likes greater than 10 and whose title is either 'MongoDB Overview' or by is 'tutorials point'. Equivalent SQL where clause is 'where likes>10 AND (by = 'tutorials point' OR title = 'MongoDB Overview')'
+  > db.mycol.find({"likes": {$gt:10}, $or: [{"by": "tutorials point"},  {"title": "MongoDB Overview"}]}).pretty()
+    {
+       "_id": ObjectId(7df78ad8902c),
+       "title": "MongoDB Overview", 
+       "description": "MongoDB is no sql database",
+       "by": "tutorials point",
+       "url": "http://www.tutorialspoint.com",
+       "tags": ["mongodb", "database", "NoSQL"],
+       "likes": "100"
+    }
+  + RDBMS: SELECT * FROM inventory WHERE likes >10 AND ( by = "tutorials point" OR title="MongoDB Overview")
+
+  * MongoDB supports regular expressions $regex queries to perform string pattern matches.
+  following example, the compound query document selects all documents in the collection where the status equals "A" and either qty is less than ($lt) 30 or item starts with the character p:
+  > db.inventory.find( {status: "A", $or: [ { qty: { $lt: 30 } }, { item: /^p/ }] })
+  + RDBMS: SELECT * FROM inventory WHERE status = "A" AND ( qty < 30 OR item LIKE "p%")
+
+$ Query on Embedded/Nested Documents:
+
+ALL Documents-->
+{ item: "journal", qty: 25, size: { h: 14, w: 21, uom: "cm" }, status: "A" },
+{ item: "notebook", qty: 50, size: { h: 8.5, w: 11, uom: "in" }, status: "A" },
+{ item: "paper", qty: 100, size: { h: 8.5, w: 11, uom: "in" }, status: "D" },
+{ item: "planner", qty: 75, size: { h: 22.85, w: 30, uom: "cm" }, status: "D" },
+{ item: "postcard", qty: 45, size: { h: 10, w: 15.25, uom: "cm" }, status: "A" }
+
+- To specify an equality condition on a field that is an embedded/nested document
+# db.inventory.find( { size: { h: 14, w: 21, uom: "cm" } } )
+
+- To specify a query condition on fields in an embedded/nested document, use dot notation ("field.nestedField").
+# db.inventory.find( { "size.uom": "in" } )
+
+For More Details, see https://docs.mongodb.com/manual/tutorial/query-documents/
+
+$ If you want to set the limit to the results of the query..
+
+# db.collection.find( {<key>:<value>}).limit(<number>)
+  > db.userInfo.find({city:"Indore"}).limit(2).pretty()
+    {
+      "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+      "name" : "Cnu",
+      "userName" : "cloves",
+      "password" : "cnu@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+    {
+      "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"),
+      "name" : "Divyansh",
+      "userName" : "hey-dev",
+      "password" : "321@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+  ? By default, the limit(2) will return first two documents that match the query but what if you don't want first two, i.e you want the second document to be first result..use skip() method;   
+
+# db.collection.find( {<key>:<value>}).limit(<number>).skip(<num>)
+  > db.userInfo.find({city:"Indore"}).limit(2).skip(1).pretty()
+    {
+      "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"),
+      "name" : "Divyansh",
+      "userName" : "hey-dev",
+      "password" : "321@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+    {
+      "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"),
+      "name" : "Punit",
+      "userName" : "punit77",
+      "password" : "321@123",
+      "email" : "xyz@gmail.com",
+      "city" : "Indore"
+    }
+
+$ Query for Null or Missing Fields: 
+
+# The { item : null } query matches documents that either contain the item field whose value is null or that do not contain the item field.
+  > db.userInfo.find({active: null}) 
+    { "_id" : ObjectId("5feca41b32682e6fc4db7fc2") }
+    {
+            "_id" : ObjectId("5feca67f32682e6fc4db7fc3"),
+            "name" : "Cnu",
+            "userName" : "cloves",
+            "password" : "cnu@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc4"),
+            "name" : "Divyansh",
+            "userName" : "hey-dev",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc5"),
+            "name" : "Punit",
+            "userName" : "punit77",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "Indore"
+    }
+    {
+            "_id" : ObjectId("5fecb2da32682e6fc4db7fc6"),
+            "name" : "Shraddha",
+            "userName" : "ilusms",
+            "password" : "321@123",
+            "email" : "xyz@gmail.com",
+            "city" : "dewas"
+    }
+    - aLL THE Documents Returns because the active key does not exist in any of the documents.
+
+# The { item : { $type: 10 } } query matches only documents that contain the item field whose value is null; i.e. the value of the item field is of BSON Type Null (type number 10) 
+  > db.userInfo.find({city: { $type: 10 }})
+    No output as there is no document in which city = null.
+
+# The { item : { $exists: false } } query matches documents that do not contain the item field:
+  > db.userInfo.find({city: { $exists: false}})
+    The query only returns the document that does not contain the city field.
+    There is no such document.
+
+
+$ Sort() method: you can sort the documents in ascending or descending order based on a particular field of document.
+
+# db.collection.find().sort({field_key:1 or -1})
+  1 is for ascending order and -1 is for descending order. The default value is 1.
+  > db.studentData.find({},{studentID:1, _id:0}).sort({studentID:1})
+    To display the student_id field of all the students in ascending order:
+    { "student_id" : 2002 }
+    { "student_id" : 2003 }
+    { "student_id" : 2004 }

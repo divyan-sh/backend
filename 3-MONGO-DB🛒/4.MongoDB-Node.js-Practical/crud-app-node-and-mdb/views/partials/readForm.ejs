@@ -1,0 +1,157 @@
+<form action="#" class="mb-3" id="search-form">
+  <!-- Search By Title -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-title"
+      />
+      <label class="form-check-label" for="search-by-title"> By Title </label>
+      <input
+        type="text"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Title"
+        name="title"
+        disabled
+      />
+    </div>
+  </div>
+  <!-- Search By Author -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-author"
+      />
+      <label class="form-check-label" for="search-by-author"> By Author </label>
+      <input
+        type="text"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Author"
+        name="author"
+        disabled
+      />
+    </div>
+  </div>
+  <!-- Search By Course Type -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-type"
+      />
+      <label class="form-check-label" for="search-by-type">
+        By Course Type
+      </label>
+      <input
+        type="text"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Course Type"
+        name="courseType"
+        disabled
+      />
+    </div>
+  </div>
+  <!-- Search By No of Videos -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-videos-count"
+      />
+      <label class="form-check-label" for="search-by-videos-count">
+        By Video Count
+      </label>
+      <select class="form-select mt-2 w-25" id="number-query" disabled>
+        <option selected value="equal">=</option>
+        <option value="$gt">></option>
+        <option value="$lt"><</option>
+        <option value="$gte">>=</option>
+        <option value="$lte"><=</option>
+      </select>
+      <input
+        type="number"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Video count"
+        name="videos"
+        min="1"
+        disabled
+      />
+    </div>
+  </div>
+  <!-- Search By Level -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-level"
+      />
+      <label class="form-check-label" for="search-by-level"> By Level </label>
+      <input
+        type="text"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Level (Beginner, Intermediate, Advanced)"
+        name="level"
+        disabled
+      />
+    </div>
+  </div>
+  <!-- Search By Rating -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-rating"
+      />
+      <label class="form-check-label" for="search-by-rating"> By Rating </label>
+      <select class="form-select mt-2 w-25" id="rating-query" disabled>
+        <option selected value="equal">=</option>
+        <option value="$gt">></option>
+        <option value="$lt"><</option>
+        <option value="$gte">>=</option>
+        <option value="$lte"><=</option>
+      </select>
+      <input
+        type="number"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Rating out of 5"
+        name="rating"
+        disabled
+        min="0"
+        max="5"
+      />
+    </div>
+  </div>
+  <!-- Search By Link -->
+  <div class="mb-3 w-100">
+    <div class="form-check mb-2">
+      <input
+        class="form-check-input read-cb"
+        type="checkbox"
+        value=""
+        id="search-by-link"
+      />
+      <label class="form-check-label" for="search-by-link"> By Link </label>
+      <input
+        type="text"
+        class="form-control mt-2 read-inp"
+        placeholder="Enter Link"
+        name="link"
+        disabled
+      />
+    </div>
+  </div>
+  <button type="submit" class="btn btn-dark" id="search-btn">Search</button>
+</form>

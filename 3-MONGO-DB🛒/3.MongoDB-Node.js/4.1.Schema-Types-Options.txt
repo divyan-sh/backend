@@ -1,0 +1,43 @@
+$ In addition to the type property, you can specify additional properties for a path. For example, if you want to lowercase a string before saving:
+ > const schema2 = new Schema({
+ >   test: {
+ >     type: String,
+ >     lowercase: true // Always convert `test` to lowercase
+ >   }
+ > });
+
+- There are certain options which apply for all schema types, and some that apply for specific schema types.
+
+# Options for ALL Schema Types:
+  + required: boolean or function, if true adds a required validator for this property
+  + default: Any or function, sets a default value for the path. If the value is a function, the return value of the function is used as the default.
+  + select: boolean, specifies default projections for queries
+  + validate: function, adds a validator function for this property
+  + get: function, defines a custom getter for this property using Object.defineProperty().
+  + set: function, defines a custom setter for this property using Object.defineProperty().
+  + alias: string, mongoose >= 4.10.0 only. Defines a virtual with the given name that gets/sets this path.
+  + immutable: boolean, defines path as immutable. Mongoose prevents you from changing immutable paths unless the parent document has isNew: true.
+  + transform: function, Mongoose calls this function when you call Document#toJSON() function, including when you JSON.stringify() a document.
+
+# You can also define MongoDB indexes using schema type options
+  + index: boolean, whether to define an index on this property.
+  + unique: boolean, whether to define a unique index on this property.
+  + sparse: boolean, whether to define a sparse index on this property.
+  > const schema2 = new Schema({
+  >   test: {
+  >     type: String,
+  >     index: true,
+  >     unique: true // Unique index. If you specify `unique: true`
+  >     // specifying `index: true` is optional if you do `unique: true`
+  >   }
+  > });
+
+# type: String Options 
+  + lowercase: boolean, whether to always call .toLowerCase() on the value
+  + uppercase: boolean, whether to always call .toUpperCase() on the value
+  + trim: boolean, whether to always call .trim() on the value
+  + match: RegExp, creates a validator that checks if the value matches the given regular expression
+  + enum: Array, creates a validator that checks if the value is in the given array.
+  + minLength: Number, creates a validator that checks if the value length is not less than the given number
+  + maxLength: Number, creates a validator that checks if the value length is not greater than the given number
+  + populate: Object, sets default populate options

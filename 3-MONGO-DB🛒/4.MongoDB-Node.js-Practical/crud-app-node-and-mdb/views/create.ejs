@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%-
+    include("./partials/nav.ejs",{home:false,create:true,read:false,update:false,del:false})
+    %>
+    <div class="container">
+      <h2 class="mt-3">Add Playlist</h2>
+      <%- include("./partials/createForm.ejs",{btnText:"Add"})%>
+    </div>
+    <!--  -->
+    <%- include("./partials/scripts.ejs",{script:"create"})%>
+  </body>
+</html>

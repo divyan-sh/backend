@@ -1,0 +1,95 @@
+? open(): Opens the connection to MongoDB.
+Syntax:-
+@ open(connection_string, [database], [port], [options], [callback])
+  +  connection_string <String> mongodb://uri or the host to which we are connecting
+  +  [database] <String> database name //optional
+  +  [port] <Number> database port //optional
+  +  [options] <Object> options //optional
+  +  db, server, replset, user, pass, auth are the options
+  +  [callback] <Function> //optional
+
+> var mongoose=require('mongoose');
+> var con = mongoose.createConnection();
+> var cb = function(err){
+>   if(!err)
+>     console.log(err);
+>   else
+>   console.log("connection opened");
+> };
+> con.open("mongodb://localhost/tutorialtous",cb);
+
+
+? openSet(): Opens the connection to a replica set.
+Syntax:-
+@ openSet(uris, [database], [options], [callback])
+ + uris <String> comma-separated mongodb:// URIs
+ + [database] <String> database name if not included in uris
+ + [options] <Object> passed to the internal driver
+ + [callback] <Function>
+   Note:Functionality of openSet() will be similar to open() except openSet() works with replicaSets
+
+> var mongoose=require('mongoose');
+> var con = mongoose.createConnection();
+> var cb = function(err){
+>   if(!err)
+>     console.log(err);
+>   else
+>   console.log("connection opened");
+> };
+> con.openSet("mongodb://localhost/tutorialtous,
+> mongodb://mongodb.tutorialtous.com:23396/tutorialtous",cb);
+
+? close(): Closes the connection, it doesn’t throw any error even the connection is not opened or already closed.
+Syntax:-
+@ close([callbackFunction]);
+
+> var mongoose=require('mongoose');
+> var con = mongoose.createConnection();
+> var cb = function(err){
+>   if(!err)
+>     console.log(err);
+>   else
+>   console.log("connection opened");
+> };
+> var ccb = function(err){
+>   if(!err)
+>     console.log(err);
+>   else
+>   console.log("connection closed");
+> };
+> con.open("mongodb://localhost/tutorialtous",cb);
+> con.close(ccb);
+> console.log("connection opened");
+> console.log(err);
+> console.log("connection closed");
+> console.log(err);
+
+? readyState: It is property of connection which holds state of the connection
+State	  Description
+0	      disconnected
+1	      connected
+2	      connecting
+3	      disconnecting
+- When this concept (readyState) is useful:
+  Due to network interrupt at server/client side or server down time connection to the database may lose, in order to trace those situations we need to use the readyState concept.
+
+> var mongoose=require('mongoose');
+> var con = mongoose.createConnection();
+> var connecting = function(err){
+> console.log("Please Wait connecting \t"+con.readyState);
+> };
+> var disconnecting = function(err){
+> console.log("Please Wait Disconnecting \t"+con.readyState);
+> };
+> var connected = function(err){
+> console.log("Connection Connected\t"+con.readyState);
+> };
+> var disconnected= function(err){
+> console.log("Connection DisConnected \t"+con.readyState);
+> };
+> con.on("connecting",connecting);
+> con.on("disconnecting",disconnecting);
+> con.on("connected",connected);
+> con.on("disconnected",disconnected);
+> con.open("mongodb://localhost/tutorialtous");
+

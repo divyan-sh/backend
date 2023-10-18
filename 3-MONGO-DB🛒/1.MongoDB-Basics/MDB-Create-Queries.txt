@@ -1,0 +1,102 @@
+$ Write Queries..
+
+? There is no create database command in MongoDB. Actually, MongoDB do not provide any command to create database.
+  + It may be look like a weird concept, if you are from traditional SQL background where you need to create a database, table and insert values in the table manually.
+  + Here, in MongoDB you don't need to create a database manually because MongoDB will create it automatically when you save the value into the defined collection at first time.
+  note: Here one thing is very remarkable that you can create collection manually by "db.createCollection()" but not the database.
+
+-But there is a command to use a existing database-->
+# use database_name 
+  These query select the database if it is present and if it is not present it will create a database with the name you provided in the query
+  > use cnuDB
+    switched to db cnuDB
+  > db (To check the currently selected database, use the command db:)
+    cnuDB   
+  > show dbs
+    admin 0.000GB  
+    config 0.000GB  
+    local 0.000GB  
+  * OOp's our database is not in the list does that mean cnuDB database is not created,
+  ? No its not like that in mongoDB there is rule DB is only valid if there is one document in it. then only it will be shown in the database list. so let's create our first collection and the document..
+
+-To create a collection there is two queries either you create a collection manually using..
+# db.createCollection(name, options)   
+  Name: is a string type, specifies the name of the collection to be created.
+  Options: is a document type, specifies the memory size and indexing of the collection. It is an optional parameter.
+  + Capped	Boolean	(Optional) If it is set to true, enables a capped collection. Capped collection is a fixed size collection that automatically overwrites its oldest entries when it reaches its maximum size. If you specify true, you need to specify size parameter also.
+
+  + AutoIndexID	Boolean	(Optional) If it is set to true, automatically create index on ID field. Its default value is false.
+
+  + Size	Number	(Optional) It specifies a maximum size in bytes for a capped collection. If capped is true, then you need to specify this field also.
+
+  + Max	Number	(Optional) It specifies the maximum number of documents allowed in the capped collection.
+  
+  > use cnuDB
+    switched to db cnuDB
+  > db.createCollection("userInfo")
+    { "ok" : 1 }
+  > show collections (To check the created collection)
+    userInfo  
+
+-OR MongoDB create collection automatically when you insert some documents.For example: Insert a document named seomount into a collection named SSSIT. The operation will create the collection if the collection does not currently exist. 
+
+# db.collection_name.insert(document)
+  This operation will automatically create a collection if the collection does not currently exist also add the document to that collection.
+  > db.userInfo.insert({ name: "Cnu", userName: "cloves", password: "cnu@123", email: "xyz@gmail.com", city: "Indore"})
+    WriteResult({ "nInserted" : 1 })
+    note: Here the nInserted field specifies the number of documents inserted. If an error is occurred then the WriteResult will specify the error information.
+
+? These method works well but The insert() method is deprecated in major driver so you should use the the .insertOne() method whenever you want to insert a single document into your collection and the .insertMany when you want to insert multiple documents into your collection. Of course this is not mentioned in the documentation but the fact is that nobody really writes an application in the shell. The same thing applies to updateOne, updateMany, deleteOne, deleteMany, findOneAndDelete, findOneAndUpdate and findOneAndReplace.
+
+# db.collection_name.insertOne(document)
+  If the collection does not exist, then the insertOne() method creates the collection, and add the document to it.
+  > db.userInfo.insertOne({name: "Cnu", userName: "cloves", password: "cnu@123", email: "xyz@gmail.com", city: "Indore"})
+    {
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5feca67f32682e6fc4db7fc3")
+    }
+    + A field insertedId with the _id value of the inserted document,If the document does not specify an _id field, then mongod will add the _id field and assign a unique ObjectId for the document before inserting. Most drivers create an ObjectId and insert the _id field, but the mongod will create and populate the _id if the driver or application does not.
+    note: If the document contains an _id field, the _id value must be unique within the collection to avoid duplicate key error.
+    note: insertOne() is not compatible with db.collection.explain(), Use insert() instead.
+
+# db.collection_name.insertMany([document1,document2,....,documentN])
+  use to insert multiple documents in a collection,To this method you need to pass an array of documents.
+  > db.userInfo.insertMany(
+  >  [
+  >    {
+  >      name: "Divyansh",
+  >      userName: "hey-dev", 
+  >      password: "321@123", 
+  >      email: "xyz@gmail.com", 
+  >      city: "Indore"
+  >    },{
+  >      name: "Punit",
+  >      userName: "punit77", 
+  >      password: "321@123", 
+  >      email: "xyz@gmail.com", 
+  >      city: "Indore"
+  >    },{
+  >      name: "Shraddha",
+  >      userName: "ilusms", 
+  >      password: "321@123", 
+  >      email: "xyz@gmail.com", 
+  >      city: "dewas"
+  >    },
+  >  ]
+  > )
+    {
+      "acknowledged" : true,
+      "insertedIds" : [
+              ObjectId("5fecb2da32682e6fc4db7fc4"),
+              ObjectId("5fecb2da32682e6fc4db7fc5"),
+              ObjectId("5fecb2da32682e6fc4db7fc6")
+      ]
+    } 
+    + The number of operations in each group cannot exceed the value of the maxWriteBatchSize of the database. As of MongoDB 3.6, this value is 100,000. This value is shown in the isMaster.maxWriteBatchSize field.
+    note: insertMany() is not compatible with db.collection.explain(), use insert() instead.
+    * You can also pass an array of documents into the insert() method.
+
+
+
+
+

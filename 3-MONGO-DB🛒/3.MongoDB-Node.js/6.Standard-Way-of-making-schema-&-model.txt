@@ -1,0 +1,26 @@
+$ There is a way to write schema and model code in your project files..
+
+First create a separate file for schema for ex: there is a schema for a storing registered user data.
+
+# users.js
+> const {Schema, model} = require("mongoose");
+> // Making schema
+> const userSchema = new Schema({
+>     name: String,
+>     email: String,
+>     password: String,
+>     dob: Date
+> })
+> // Making model from the schema
+> const User = model("User",userSchema);
+> // exporting the model
+> module.exports = User;
+
+# Now suppose in other file you want to add a document to that collection: so just import it..
+> const User = require("./users");
+> let newUser= new User({
+>     name: "Cnu",
+>     email: "hey.cn0810@gmail.com",
+>     password: "*******",
+>     dob: 26022001,
+> })

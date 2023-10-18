@@ -1,0 +1,51 @@
+$ Updating Documents Query:
+
+# Model.updateOne(<filter>,<doc>,<options>)
+  Each model has its own update method for modifying documents in the database without returning them to your application. 
+  > Tank.updateOne({ size: 'large' }, { name: 'T-90' }, function(err, res) {
+  >   // Updated at most one doc, `res.modifiedCount` contains the number
+  >   // of docs that MongoDB updated
+  > });
+
+There are many more methods to update the docs..
+
++ Model.updateMany()
++ Model.findOneAndUpdate()
++ Model.update() // deprecated
++ Model.replaceOne()
++ Model.FindOneAndReplace()
+
+> const updateDocument= await (_id) => {
+>     try {
+>         const result = await Playlist.updateOne({_id},{
+>           name: "JavaScript"
+>         })
+>         if(result.nModified) 
+>         console.log("Updated Successfully");
+>     }
+>     catch (e) {
+>         console.log("USome Error Occurred");
+>     }
+> }
+
+? If you want to see the document which you want to modify. then you can use:
+  # findOneAndUpdate()
+  # findByIdAndUpdate()
+    - to use this you need to add useFindAndModify: true in the options
+> const updateDocument= await (_id) => {
+>     try {
+>         const result = await Playlist.findByIdAndUpdate({_id},{name: "JS"},{useFindAndModify: false, new: true})
+>         // Still you will see the original document not the recently updated one to see that use a option- new: true
+>         console.log(result);
+>     }
+>     catch (e) {
+>         console.log("USome Error Occurred");
+>     }
+> }
+
+Note: All top level update keys which are not atomic operation names are treated as set operations: i.e
+> Model.findByIdAndUpdate(id, { name: 'jason bourne' }, options, callback)
+// is sent as
+> Model.findByIdAndUpdate(id, { $set: { name: 'jason bourne' }}, options, callback)
+
+This helps prevent accidentally overwriting your document with { name: 'jason bourne' }.

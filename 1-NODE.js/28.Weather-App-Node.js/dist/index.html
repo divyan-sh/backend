@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Weather App</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Quicksand", sans-serif;
+      }
+      body,
+      html {
+        font-size: 62.5%;
+        height: 100%;
+      }
+      html {
+        background: #eee;
+      }
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .box {
+        padding: 3rem;
+        width: 21vw;
+        background-color: #a5bbdd;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.2rem 3rem rgba(0, 0, 0, 0.2);
+        min-width: 20rem;
+        min-height: 35rem;
+        transform: translate3d(0, 0, 0);
+      }
+      .wave {
+        opacity: 0.3;
+        background: #fff;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        width: 50rem;
+        height: 50rem;
+        margin-left: -25rem;
+        margin-top: -25rem;
+        transform-origin: 50% 48%;
+        border-radius: 43%;
+        animation: drift 3000ms infinite linear;
+        z-index: -1;
+      }
+
+      .wave-three {
+        animation: drift 5000ms infinite linear;
+        z-index: 2 !important;
+        opacity: 0.2;
+      }
+      .wave-two {
+        animation: drift 7000ms infinite linear;
+        z-index: 3 !important;
+        opacity: 0.1;
+      }
+
+      .box::after {
+        content: "";
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 11;
+        transform: translate3d(0, 0, 0);
+      }
+
+      @keyframes drift {
+        from {
+          transform: rotate(0deg);
+        }
+        from {
+          transform: rotate(360deg);
+        }
+      }
+
+      .weather-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 6rem;
+        /* margin: 4rem 0; */
+        height: 30vh;
+      }
+      .weather-icon .fas {
+        animation: fas-anime 3s linear infinite alternate;
+      }
+      @keyframes fas-anime {
+        from {
+          transform: scale(1.1);
+        }
+        to {
+          transform: scale(1.6);
+        }
+      }
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .location {
+        font-size: 3rem;
+        margin-top: 1.5rem;
+        font-weight: 600;
+      }
+
+      .date,
+      .min-max {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        margin-top: 10px;
+        color: #57606f;
+        font-weight: 300;
+      }
+
+      .temperature {
+        margin-top: 2rem;
+        font-size: 4rem;
+        font-weight: 600;
+      }
+
+      .fa-street-view {
+        animation: rotates 3s linear infinite alternate;
+      }
+      @keyframes rotates {
+        from {
+          transform: translateX(-0.5rem);
+        }
+        to {
+          transform: translateX(0.5rem);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="wave -one"></div>
+        <div class="wave -two"></div>
+        <div class="wave -three"></div>
+
+        <div class="weather-icon">
+          <i class="fas fa-sun" style="color: #eccc68"></i>
+        </div>
+
+        <div class="info">
+          <h2 class="location">
+            <i
+              class="fas fa-street-view"
+              style="color: #fff; margin: 0 0.5rem"
+            ></i
+            >{%location%},{%country%}
+          </h2>
+          <p class="date">WED | OCT 23 | 10:49Am</p>
+          <h1 class="temperature">{%tempVal%}°C</h1>
+          <p class="min-max">MIN {%tempMin%}°C | MAX {%tempMax%}°C</p>
+        </div>
+      </div>
+    </div>
+    <div class="form">
+      <form action="">
+        <input type="text" name="cityName" id="cityName" />
+        <button type="submit" id="btn-sub">Search</button>
+      </form>
+    </div>
+    <script>
+      // document.querySelector("#btn-sub").addEventListener("click", (e) => {
+      //   // e.preventDefault();
+      // });
+
+      const curDate = document.querySelector(".date");
+      let weatherIcon = document.querySelector(".weather-icon");
+      let tempStatus = "{%tempStatus%}";
+      if (tempStatus == "Sunny") {
+        weatherIcon.innerHTML = `<i class="fas fa-sun" style="color:#eccc68"></i>`;
+      } else if (tempStatus == "Clouds") {
+        weatherIcon.innerHTML = `<i class="fas fa-cloud" style="color:#f1f2f6"></i>`;
+      } else if (tempStatus == "Rainy") {
+        weatherIcon.innerHTML = `<i class="fas fa-cloud-rain" style="color:#a4b0be"></i>`;
+      } else if (tempStatus == "Mist") {
+        weatherIcon.innerHTML = `<i class="fas fa-smog" style="color: #eee"></i>`;
+      } else {
+        weatherIcon.innerHTML = `<i class="fas fa-cloud" style="color:#44c3de"></i>`;
+      }
+      const getCurrentDay = () => {
+        let dayNo = new Date().getDay(); // returns number of days (0-6)
+        let arrayOfDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        return arrayOfDays[dayNo];
+      };
+
+      const getCurrentDate = () => {
+        let months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        let monthNo = new Date().getMonth();
+        let date = new Date().getDate();
+        let year = new Date().getFullYear();
+        return `${months[monthNo]} ${date} ${year}`;
+      };
+
+      const getCurrentTime = () => {
+        let hours = new Date().getHours();
+        let mins = new Date().getMinutes();
+        let periods = "AM";
+        if (hours > 11) {
+          periods = "PM";
+          if (hours > 12) hours -= 12;
+        }
+        if (mins < 10) {
+          mins = "0" + mins;
+        }
+        return `${hours}:${mins} ${periods}`;
+      };
+
+      curDate.innerText = `${getCurrentDay()} | ${getCurrentDate()} | ${getCurrentTime()}`;
+    </script>
+  </body>
+</html>

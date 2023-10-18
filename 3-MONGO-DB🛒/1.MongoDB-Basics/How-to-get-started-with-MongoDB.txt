@@ -1,0 +1,14 @@
+$ How to get started with MongoDB..
+  > Basically MongoDB offers 2 Deployments types..
+    -1. Cloud Based.
+    -2. On-Premises (i.e on your System)
+    
+  > For this tutorial we will use System based i.e we will install MongoDB on our System and then use it, and later on we will learn cloud based..
+  > Download the Community Server from https://www.mongodb.com/try/download/community and install it.. as a normal program, watch this video for procedure https://youtu.be/yiz5bmLVVhs
+
+$ I hope you u GUYS Setup your mongoDB with environment variables.. so let's get start learning queries..
+  
+--> Type mongo on shell and you will enter in the mongo shell where you can execute mongoDB queries..
+
+# show dbs 
+  first query, which shows the database that exists on your system..

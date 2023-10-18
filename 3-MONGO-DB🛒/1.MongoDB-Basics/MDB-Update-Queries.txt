@@ -1,0 +1,207 @@
+$ Update Queries..
+  MongoDB's update() and save() methods are used to update document into a collection. The update() method updates the values in the existing document while the save() method replaces the existing document with the document passed in save() method.
+
+# db.collection.update(SELECTION_CRITERIA, UPDATED_DATA)
+  Following example will set the new title 'React.js' of the documents whose title is 'ReactJS'.
+  > db.testData.update({title: "ReactJS"},{$set:{title: "React.js"}})
+    WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+ 
+  ? By default, MongoDB will update only a single document. To update  multiple documents, you need to set a parameter 'multi' to true.  
+  > db.testData.update({title: "MongoDB"},{$set:{title: "MongoDB_INFO"}},{multi: true})
+    WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 2 })
+
+# db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})
+  This query is to replace the complete document..
+  > db.testData.save({_id:ObjectId("5fed73441d695b3948861b51"),title:"Next.js",description:"A React.js framework for server-side rendering"})
+    WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+# db.COLLECTION_NAME.findOneAndUpdate(SELECTION_CRITERIA, UPDATED_DATA)
+  The findOneAndUpdate() method updates the values in the existing document, and also shows documents which match the selection criteria.
+  > db.testData.findOneAndUpdate({title: "MongoDB_INFO"},{$set:{description: "A NoSql Database with documents oriented Approach"}})
+  {
+    "_id" : ObjectId("5fed72dc1d695b3948861b4e"),
+    "title" : "MongoDB_INFO",
+    "description" : "NoSQL database"
+  }
+
+# db.COLLECTION_NAME.updateOne(<filter>, <update>)
+  This methods updates a single document which matches the given filter.
+  > db.testData.updateOne({title: "MongoDB_INFO"},{$set:{title: "Mongo_DB"}})
+
+  ? Parameters
+  db.collection.updateOne(
+   <filter>,
+   <update>,
+   {
+     upsert: <boolean>,
+     writeConcern: <document>,
+     collation: <document>,
+     arrayFilters: [ <filterdocument1>, ... ],
+     hint:  <document|string>        // Available starting in MongoDB 4.2.1
+   }
+  )
+
+  + <filter> --> document --> The selection criteria for the update. The same query selectors as in the find() method are available. [Specify an empty document { } to update the first document returned in the collection.]
+
+  + <update> --> document or pipeline --> The modifications to apply.
+    Can be one of the following:
+    --1.Update with an Update Operator Expressions Document:
+        Here we use update operators to perform different operations.
+        > $currentDate	Sets the value of a field to current date, either as a Date or a Timestamp.
+        > $inc	        Increments the value of the field by the specified amount.
+        > $min	        Only updates the field if the specified value is less than the existing field value.
+        > $max	        Only updates the field if the specified value is greater than the existing field value.
+        > $mul	        Multiplies the value of the field by the specified amount.
+        > $rename	    Renames a field.
+        > $set	        Sets the value of a field in a document.
+        > $setOnInsert	Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.
+        > $unset	    Removes the specified field from a document.
+
+    --2. Update with an Aggregation Pipeline.
+          an aggregation pipeline [ <stage1>, <stage2>, ... ] that specifies the modifications to perform. The pipeline can consist of the following stages:
+          > $addFields and its alias $set
+          > $project and its alias $unset
+          > $replaceRoot and its alias $replaceWith.
+
+  + upsert --> boolean --> Optional. When true, updateOne() either:
+    Creates a new document if no documents match the filter
+    Updates a single document that matches the filter.
+    Defaults to false.
+
+  + writeConcern --> document --> Optional. A document expressing the write concern. Omit to use the default write concern.
+
+  + collation --> document --> Optional.Specifies the collation to use for the operation, Collation allows users to specify language-specific rules for string comparison, such as rules for letter case and accent marks.
+
+  + arrayFilters --> array --> Optional, An array of filter documents that determine which array elements to modify for an update operation on an array field. Here we will use array updates operator.
+
+  + hint --> Document or string --> Optional. A document or string that specifies the index to use to support the query predicate.
+    
+
+   
+-- Example:1 Update using Update Operator Expressions.
+   The restaurant collection contains the following documents:
+   { "_id" : 1, "name" : "Central Perk Cafe", "Borough" : "Manhattan" },
+   { "_id" : 2, "name" : "Rock A Feller Bar and Grill", "Borough" : "Queens", "violations" : 2 },
+   { "_id" : 3, "name" : "Empire State Pub", "Borough" : "Brooklyn", "violations" : 0 }
+   
+   - The following operation updates a single document where name: "Central Perk Cafe" with the violations field:
+   > db.restaurant.updateOne({name: "Central Perk Cafe"},{$set: {violations:3}})
+     { "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+--Example:2 Update with Aggregation Pipeline.(Multiple update operations in one GO)
+  Create a members collection with the following documents:
+  { "_id" : 1, "member" : "abc123", "status" : "A", "points" : 2, "misc1" : "note to self: confirm status", "misc2" : "Need to activate", "lastUpdate" : ISODate("2019-01-01T00:00:00Z") },
+  { "_id" : 2, "member" : "xyz123", "status" : "A", "points" : 60, comments: [ "reminder: ping me at 100pts", "Some random comment" ], "lastUpdate" : ISODate("2019-01-01T00:00:00Z") }
+
+  - Assume that instead of separate misc1 and misc2 fields in the first document, you want to gather these into a comments field, like the second document. The following update operation uses an aggregation pipeline to:
+    + add the new comments field and set the lastUpdate field.
+    + remove the misc1 and misc2 fields for all documents in the collection.
+  > db.members.updateOne(
+  >     {
+  >         _id:1
+  >     },
+  >     [
+  >         {
+  >             $set: {
+  >                 status: "Modified",
+  >                 comments:["$misc1", "$misc2"],
+  >                 lastUpdate: "$$NOW
+  >             }
+  >         },
+  >         {
+  >             $unset: ["misc1", "$misc"]
+  >         }
+  >     ]
+  > )
+
+--Example:3 The aggregation pipeline allows the update to perform conditional updates based on the current field values as well as use current field values to calculate a separate field value.
+  A students3 collection with the following documents:
+   { "_id" : 1, "tests" : [ 95, 92, 90 ], "average" : 92, "grade" : "A", "lastUpdate" : ISODate("2020-01-23T05:18:40.013Z") },
+   { "_id" : 2, "tests" : [ 94, 88, 90 ], "average" : 91, "grade" : "A", "lastUpdate" : ISODate("2020-01-23T05:18:40.013Z") },
+   { "_id" : 3, "tests" : [ 70, 75, 82 ], "lastUpdate" : ISODate("2019-01-01T00:00:00Z") }
+
+  -The third document _id: 3 is missing the average and grade fields. Using an aggregation pipeline, you can update the document with the calculated grade average and letter grade. 
+   > db.students3.updateOne(
+   >    { _id: 3 },
+   >    [
+   >      { $set: { average: { $trunc: [  { $avg: "$tests" }, 0 ] }, lastUpdate: "$$NOW" } },
+   >      { $set: { grade: { $switch: {
+   >                            branches: [
+   >                                { case: { $gte: [ "$average", 90 ] }, then: "A" },
+   >                                { case: { $gte: [ "$average", 80 ] }, then: "B" },
+   >                                { case: { $gte: [ "$average", 70 ] }, then: "C" },
+   >                                { case: { $gte: [ "$average", 60 ] }, then: "D" }
+   >                            ],
+   >                            default: "F"
+   >      } } } }
+   >    ]
+   > )
+   First Stage: 
+    -The $set stage:
+     + calculates a new field average based on the average of the tests field. 
+       See $avg for more information on the $avg aggregation operator and $trunc for more information on the $trunc truncate aggregation operator.
+       sets the field lastUpdate to the value of the aggregation variable NOW. The aggregation variable NOW resolves to the current datetime value and remains the same throughout the pipeline. 
+       To access aggregation variables, prefix the variable with double dollar signs $$ and enclose in quotes.
+   Second Stage:
+    -The $set stage calculates a new field grade based on the average field calculated in the previous stage. See $switch for more information on the $switch aggregation operator.
+
+
+--Example:4, Specify arrayFilters for an Array Update Operations
+  when updating an array field, you can specify arrayFilters that determine which array elements to update.
+  A collection students with the following documents:
+   { "_id" : 1, "grades" : [ 95, 92, 90 ] },
+   { "_id" : 2, "grades" : [ 98, 100, 102 ] },
+   { "_id" : 3, "grades" : [ 95, 110, 100 ] }
+
+ - To modify all elements that are greater than or equal to 100 in the grades array, use the filtered positional operator $[<identifier>] with the arrayFilters option
+ > db.students.updateOne(
+ >    { grades: { $gte: 100 } },
+ >    { $set: { "grades.$[element]" : 100 } },
+ >    { arrayFilters: [ { "element": { $gte: 100 } } ] }
+ > )
+
+
+--Example:5, Update Specific Elements of an Array of Documents
+  A collection students2 with the following documents:
+   {
+      "_id" : 1,
+      "grades" : [
+         { "grade" : 80, "mean" : 75, "std" : 6 },
+         { "grade" : 85, "mean" : 90, "std" : 4 },
+         { "grade" : 85, "mean" : 85, "std" : 6 }
+      ]
+   },
+   {
+      "_id" : 2,
+      "grades" : [
+         { "grade" : 90, "mean" : 75, "std" : 6 },
+         { "grade" : 87, "mean" : 90, "std" : 3 },
+         { "grade" : 85, "mean" : 85, "std" : 4 }
+      ]
+   }
+
+   -To modify the value of the mean field for all elements in the grades array where the grade is greater than or equal to 85
+   > db.students2.updateOne(
+   >    { },
+   >    { $set: { "grades.$[elem].mean" : 100 } },
+   >    { arrayFilters: [ { "elem.grade": { $gte: 85 } } ] }
+   > )
+
+  
+# db.collection_name.updateMany(<filter>,<update>,<optional-parameter>)
+  Updates all documents that match the specified filter for a collection.
+  > db.empDetails.updateMany(
+	> {Age:{ $gt: "25" }},
+	> { $set: { Age: '00'}}
+  > )
+  ? Parameters functionality of this is same as the previous method updateOne()
+  
+# db.collection.replaceOne(<filter>, <replacement>, options)
+  Replaces a single document within the collection based on the filter.
+  > db.testDate.replaceOne(
+  >   { name: "Central Perk Cafe"},
+  >   {name: "Central Perk Cafe",type:"Bar-Cafe},
+  > )
+
+$ We have to read the Operators So that we can perform queries in advance data set also..
+

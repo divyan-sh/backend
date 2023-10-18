@@ -1,0 +1,42 @@
+$ Delete Queries..
+
+? TO Delete database
+# db.dropDatabase()  
+  This syntax will delete the selected database. In the case you have not selected any database, it will delete default "test" database.
+
+? To Delete Collection
+# db.collection_name.drop()
+  The drop command returns true if it successfully drops a collection. It returns false when there is no existing collection to drop.
+
+? To Delete Documents
+# db.collection.deleteOne(<filter>,Options)
+  <filter> -- Specifies deletion criteria using query operators.
+  Removes a single document from a collection, that matches you filter.
+  > db.testData.deleteOne({title: "Next.js"})
+    { "acknowledged" : true, "deletedCount" : 1 }
+
+# db.collection.deleteMany(<filter>,Options)
+  Removes all documents that match the filter from a collection.
+  > db.testData.deleteMany(
+  >     {age: {$lt:20 } }
+  > )
+    { "acknowledged" : true, "deletedCount" : 3 }
+
+? There are some other methods also to delete documents.
+# db.collection.remove(<filter>,Options)
+  > db.testData.remove(
+  >     {title: "Mongo-DB"}
+  > )
+  These will delete all documents with title "Mongo-DB"
+
+  -If there are multiple records and you want to delete only the first record, then set justOne parameter in remove() method.
+  > db.testData.remove(
+      { title: "Mongo-DB"}
+      1
+  )
+
+  -If you don't specify deletion criteria, then MongoDB will delete whole documents from the collection. This is equivalent of SQL's truncate command.
+  > db.testData.remove({})
+  Also
+  > db.testData.deleteMany({})
+    this also works same..

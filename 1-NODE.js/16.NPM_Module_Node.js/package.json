@@ -1,0 +1,16 @@
+{
+  "name": "16.npm_module_node",
+  "version": "1.0.0",
+  "description": "Npm Tutorial",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "validator": "^13.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DivyanSH",
+  "license": "ISC"
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%-
+    include("./partials/nav.ejs",{home:false,create:false,read:false,update:false,del:true})
+    %>
+    <div class="container">
+      <h2 class="mb-3 mt-3">Delete Playlist</h2>
+      <p class="form-text">Search the playlist which you want to Delete</p>
+      <%- include("./partials/readForm.ejs")%>
+      <!-- Result of the Query -->
+      <p class="mb-3 mt-3 form-text result-text">
+        Your Search Result Will Be Appear Here...
+      </p>
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="delete-options"
+          id="delete-one"
+        />
+        <label class="form-check-label" for="delete-one"> Delete One </label>
+        <br />
+        <input
+          class="form-check-input"
+          type="radio"
+          name="delete-options"
+          id="delete-many"
+        />
+        <label class="form-check-label" for="delete-many"> Delete Many </label>
+        <br />
+        <input
+          class="form-check-input"
+          type="radio"
+          name="delete-options"
+          id="delete-all"
+        />
+        <label class="form-check-label" for="delete-all"> Delete All </label>
+      </div>
+      <div class="all-playlists mt-3 mb-3"></div>
+      <div class="mt-2 mb-2">
+        <button type="button" class="btn btn-danger" id="delete-btn">
+          Delete
+        </button>
+      </div>
+    </div>
+    <!--  -->
+    <%- include("./partials/scripts.ejs",{script:"read&delete"})%>
+  </body>
+</html>

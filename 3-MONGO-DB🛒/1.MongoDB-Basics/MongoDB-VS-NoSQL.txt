@@ -1,0 +1,64 @@
+$ MongoDB vs MySQL
+we already seen the difference between RDBMS and NRDBMS, but this time let's get deeper into each of it..
+
+# In MySql we store data in the form of rows and columns.
+  i.e first we create our database and then we table then we create columns of different data fields and now we insert our data in the form of rows..
+  > Example: Suppose i want to store name and number of a user then
+    + First i Create a Table name 'userInfo'
+    + Then i will create two columns, one for "userName" and the other for "userNum"
+    + Then i will insert the data in each column and this will from my one row.
+      >> Table: UserInfo
+    __________________________
+    |__userName__|__userNum__|
+    |__cnu_______|__1232_____|
+    |__punit_____|__9900_____|
+
+  BUT
+# In MongoDB we store data in the Form of BSON format(for now assume BSON and JSON are same) i.e JSON like format
+  In which instead of creating a Table we create a "Collection" and then we don't need to create separate columns for each data we will create a row and inside that row we will insert our data in separate "Fields", now these rows are called "Document".
+  > Example": Suppose i want to store data of a user registration..(name,email,username,password,number)
+  + Create a collection name it: "userInfo".
+    collection: userInfo
+    [
+        //documents
+    ]
+  + Now for each user create a separate document: 
+    [
+        {
+            // Fields.
+        }
+    ]
+  + Till now we have successfully create are database structure now let's add fields in the document..NOTE: you must add id field which should be unique to every user, using this id we reference our document of particular user.
+    [
+        {
+              "_id": ObjectId("12873378214618327"),
+              "name": "Divyansh Thakur",
+              "email": "its.div09@gmail.com",
+              "userName": "hey-developer",
+              "password": "cnu@123",
+              "number": "122398392",
+        }
+    ]
+ + Now if you want to add another user.. simply add another document. like this..
+   Note: MongoDB Provides us more flexibility than MySql for ex if i want to add a filed into a document,
+   then i don't need to add that field into every document.
+   ? i.e no of fields can vary document by document..
+    [
+        {
+              "_id": ObjectId("12873378214618327"),
+              "name": "Divyansh Thakur",
+              "email": "its.div09@gmail.com",
+              "userName": "hey-developer",
+              "password": "cnu@123",
+              "number": "122398392",
+        },
+        {
+              "_id": ObjectId("73648236409813648"),
+              "name": "Punit Solanki",
+              "email": "punit09@gmail.com",
+              "userName": "prince77",
+              "password": "punit@123",
+              "number": "122398392",
+              "activity" : "unActive",
+        }
+    ]

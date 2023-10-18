@@ -1,0 +1,133 @@
+
+# Querying: 
+  Finding documents is easy with Mongoose, which supports the rich query syntax of MongoDB. Documents can be retreived using each models find, findById, findOne, or where static methods.
+  + Model.deleteMany()
+  + Model.deleteOne()
+  + Model.find()
+  + Model.findById()
+  + Model.findByIdAndDelete()
+  + Model.findByIdAndRemove()
+  + Model.findByIdAndUpdate()
+  + Model.findOne()
+  + Model.findOneAndDelete()
+  + Model.findOneAndRemove()
+  + Model.findOneAndReplace()
+  + Model.findOneAndUpdate()
+  + Model.replaceOne()
+  + Model.updateMany()
+  + Model.updateOne()
+  A mongoose query can be executed in one of two ways. First, if you pass in a callback function, Mongoose will execute the query asynchronously and pass the results to the callback.
+  A query also has a .then() function, and thus can be used as a promise.
+  
+  ? Way-1:
+  > const Person = mongoose.model('Person', yourSchema);
+  // find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
+  > Person.findOne({ 'name.last': 'Ghost' }, 'name occupation', function (err, person) {
+  >   if (err) return handleError(err);
+  // Prints "Space Ghost is a talk show host".
+  >   console.log('%s %s is a %s.', person.name.first, person.name.last,
+  >     person.occupation);
+  > });
+  -Mongoose executed the query and passed the results to callback. All callbacks in Mongoose use the pattern: callback(error, result). If an error occurs executing the query, the error parameter will contain an error document, and result will be null. If the query is successful, the error parameter will be null, and the result will be populated with the results of the query.
+
+  ? Way-2: Now let's look at what happens when no callback is passed:
+  // find each person with a last name matching 'Ghost'
+  > const query = Person.findOne({ 'name.last': 'Ghost' });
+  > 
+  // selecting the `name` and `occupation` fields
+  > query.select('name occupation');
+  > 
+  // execute the query at a later time
+  > query.exec(function (err, person) {
+  >   if (err) return handleError(err);
+      // Prints "Space Ghost is a talk show host."
+  >   console.log('%s %s is a %s.', person.name.first, person.name.last,
+  >     person.occupation);
+  > });
+
+  ? A Query enables you to build up a query using chaining syntax, rather than specifying a JSON object.
+    // With a JSON doc
+  > Person.
+  >   find({
+  >     occupation: /host/,
+  >     'name.last': 'Ghost',
+  >     age: { $gt: 17, $lt: 66 },
+  >     likes: { $in: ['vaporizing', 'talking'] }
+  >   }).
+  >   limit(10).
+  >   sort({ occupation: -1 }).
+  >   select({ name: 1, occupation: 1 }).
+  >   exec(callback);
+  > 
+    // Using query builder
+  > Person.
+  >   find({ occupation: /host/ }).
+  >   where('name.last').equals('Ghost').
+  >   where('age').gt(17).lt(66).
+  >   where('likes').in(['vaporizing', 'talking']).
+  >   limit(10).
+  >   sort('-occupation').
+  >   select('name occupation').
+  >   exec(callback);
+
+# .count()
+  if i use this method at the end of the query the query will return the number of documents that matches the query.
+  -But the count method is deprecated now you can use 
+  > Person.
+  >   find({
+  >     occupation: /host/,
+  >     'name.last': 'Ghost',
+  >     age: { $gt: 17, $lt: 66 },
+  >     likes: { $in: ['vaporizing', 'talking'] }
+  >   }).
+  >   limit(10).
+  >   sort({ occupation: -1 }).
+  >   select({ name: 1, occupation: 1 }).
+  >   .count()
+  >   exec(callback);
+  ? countDocuments() or estimatedDocumentCount()
+  
+# Queries are Not Promises: 
+  Mongoose queries are not promises. They have a .then() function for co and async/await as a convenience. However, unlike promises, calling a query's .then() can execute the query multiple times.
+  - For example, the below code will execute 3 updateMany() calls, one because of the callback, and two because .then() is called twice.
+    > const q = MyModel.updateMany({}, { isDeleted: true }, function() {
+    >   console.log('Update 1');
+    > });
+    > q.then(() => console.log('Update 2'));
+    > q.then(() => console.log('Update 3'));
+    note:Don't mix using callbacks and promises with queries, or you may end up with duplicate operations. That's because passing a callback to a query function immediately executes the query, and calling then() executes the query again.
+
+    Mixing promises and callbacks can lead to duplicate entries in arrays. For example, the below code inserts 2 entries into the tags array, *not just 1.
+    > const BlogPost = mongoose.model('BlogPost', new Schema({
+    >   title: String,
+    >   tags: [String]
+    > }));
+    > 
+      // Because there's both `await` **and** a callback, this `updateOne()` executes twice
+      // and thus pushes the same string into `tags` twice.
+    > const update = { $push: { tags: ['javascript'] } };
+    > await BlogPost.updateOne({ title: 'Introduction to Promises' }, update, (err, res) => {
+    >   console.log(res);
+    > });
+
+# References to other documents:
+  There are no joins in MongoDB but sometimes we still want references to documents in other collections. This is where population comes in.
+
+# Streaming: 
+  You can stream query results from MongoDB. You need to call the Query#cursor() function to return an instance of QueryCursor.
+  > const cursor = Person.find({ occupation: /host/ }).cursor();
+  > for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+  >   console.log(doc); // Prints documents one at a time
+  > }
+
+  - Iterating through a Mongoose query using async iterators also creates a cursor.
+  > for await (const doc of Person.find()) {
+  >   console.log(doc); // Prints documents one at a time
+  > }
+
+  - Cursors are subject to cursor timeouts. By default, MongoDB will close your cursor after 10 minutes and subsequent next() calls will result in a MongoError: cursor id 123 not found error. To override this, set the noCursorTimeout option on your cursor.
+  // MongoDB won't automatically close this cursor after 10 minutes.
+  > const cursor = Person.find().cursor().addCursorFlag('noCursorTimeout', true);
+  note: However, cursors can still time out because of session idle timeouts. So even a cursor with noCursorTimeout set will still time out after 30 minutes of inactivity😅.
+
+? for more details--> https://mongoosejs.com/docs/queries.html

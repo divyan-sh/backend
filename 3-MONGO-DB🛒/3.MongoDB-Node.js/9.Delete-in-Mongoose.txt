@@ -1,0 +1,12 @@
+$ Delete Query In Mongoose..
+  Models have static deleteOne() and deleteMany() functions for removing all documents matching the given filter.
+
+# Model.deleteOne(<filter>,<options>,<callback>)
+  > Tank.deleteOne({ size: 'large' }, function (err) {
+  >   if (err) return handleError(err);
+  >   // deleted at most one tank document
+  > });
+
+# Model.deleteMany(<filter>,<options>,<callback>)
+# Model.findByIdAndDelete(<filter>,<options>,<callback>)
+# Model.findOneAndDelete(<filter>,<options>,<callback>)

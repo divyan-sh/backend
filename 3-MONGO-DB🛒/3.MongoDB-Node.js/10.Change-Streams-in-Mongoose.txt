@@ -1,0 +1,28 @@
+$ Change streams provide a way for you to listen to all inserts and updates going through your MongoDB database. Note that change streams do not work unless you're connected to a MongoDB replica set.
+
+> async function run() {
+>   // Create a new mongoose model
+>   const personSchema = new mongoose.Schema({
+>     name: String
+>   });
+>   const Person = mongoose.model('Person', personSchema, 'Person');
+> 
+>   // Create a change stream. The 'change' event gets emitted when there's a
+>   // change in the database
+>   Person.watch().
+>     on('change', data => console.log(new Date(), data));
+> 
+>   // Insert a doc, will trigger the change stream handler above
+>   console.log(new Date(), 'Inserting doc');
+>   await Person.create({ name: 'Axl Rose' });
+> }
+
+The output from the above async function will look like what you see below.
+
+> 2018-05-11T15:05:35.467Z 'Inserting doc'
+> 2018-05-11T15:05:35.487Z 'Inserted doc'
+> 2018-05-11T15:05:35.491Z { _id: { _data: ... },
+>   operationType: 'insert',
+>   fullDocument: { _id: 5af5b13fe526027666c6bf83, name: 'Axl Rose', __v: 0 },
+>   ns: { db: 'test', coll: 'Person' },
+>   documentKey: { _id: 5af5b13fe526027666c6bf83 } }

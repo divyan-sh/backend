@@ -1,0 +1,62 @@
+$ JSON vs BSON...
+  JSON and BSON are close cousins, as their nearly identical names imply, but you wouldn’t know it by looking at them side-by-side. JSON, or JavaScript Object Notation, is the wildly popular standard for data interchange on the web, on which BSON (Binary JSON) is based
+
+# Where did BSON came from and WHY? 
+  + BSON is used by mongoDB to store data, we always say mongoDB stores data in JSON like format,
+  + Now you will get it why we use Json like and not JSON,
+  + because mongoDB stores data in BSON format which is almost JSON like.
+
+# What is JSON?
+  + JavaScript Object Notation, more commonly known as JSON, JavaScript objects are simple associative containers, wherein a string key is mapped to a value (which can be a number, string, function, or even another object). This simple language trait allowed JavaScript objects to be represented remarkably simply in text.
+  + As JavaScript became the default language of client-side web development, JSON began to take on a life of its own. By virtue of being both human- and machine-readable, and comparatively simple to implement support for in other languages, JSON quickly moved beyond the web page, and into software everywhere. 
+  + JSON shows up in many different cases:
+    APIs
+    Configuration files
+    Log messages
+    Database storage
+  + So JSON consider as the best format to share the data over the web and Database because it was lit..
+
+* They why did this BSON come..
+? Listen everything has a loophole JSON also have some, When mongoDB was inventing, JSON’s ubiquity made it the obvious choice for representing data structures in MongoDB’s innovative document data model. However, there are several issues that make JSON less than ideal for usage inside of a database.\
+-1. JSON is a text-based format, and text parsing is very slow.
+-2. JSON’s readable format is far from space-efficient, another database concern.
+-3. JSON only supports a limited number of basic data types.
+
+@In order to make MongoDB JSON-first, but still high-performance and general-purpose, BSON was invented to bridge the gap: a binary representation to store data in JSON format, optimized for speed, space, and flexibility. It’s not dissimilar from other interchange formats like protocol buffers, or thrift, in terms of approach.
+
+# What is BSON?
+  + BSON simply stands for “Binary JSON,” and that’s exactly what it was invented to be. BSON’s binary structure encodes type and length information, which allows it to be parsed much more quickly.
+  + Since its initial formulation, BSON has been extended to add some optional non-JSON-native data types, like dates and binary data, without which MongoDB would have been missing some valuable support.
+  + Languages that support any kind of complex mathematics typically have different sized integers (ints vs longs) or various levels of decimal precision (float, double, decimal128, etc.).
+  + Not only is it helpful to be able to represent those distinctions in data stored in MongoDB, it also allows for comparisons and calculations to happen directly on data in ways that simplify consuming application code.
+
+# Does MongoDB use BSON, or JSON?
+  + MongoDB stores data in BSON format both internally, and over the network, but that doesn’t mean you can’t think of MongoDB as a JSON database. Anything you can represent in JSON can be natively stored in MongoDB, and retrieved just as easily in JSON.
+
+? The following are some example documents (in JavaScript / Python style syntax) and their corresponding BSON representations.
+
+>> {"hello": "world"} →
+   \x16\x00\x00\x00           // total document size
+   \x02                       // 0x02 = type String
+   hello\x00                  // field name
+   \x06\x00\x00\x00world\x00  // field value
+   \x00                       // 0x00 = type EOO ('end of object')
+
+>> {"BSON": ["awesome", 5.05, 1986]} →
+    \x31\x00\x00\x00
+    \x04BSON\x00
+    \x26\x00\x00\x00
+    \x02\x30\x00\x08\x00\x00\x00awesome\x00
+    \x01\x31\x00\x33\x33\x33\x33\x33\x33\x14\x40
+    \x10\x32\x00\xc2\x07\x00\x00
+    \x00
+    \x00
+
+# JSON VS BSON
+>> ENCODING : UTF-8 String  |   Binary
+
+>> DATA SUPPORT : String, Boolean, Number, Array    |   String, Boolean, Number (Integer, Float, Long, Decimal128...), Array, Date, Raw Binary
+
+>> READABILITY : Human and Machine  |   Machine Only
+
+$ Don't worry We are not going to write our data in BSON format we write our data in JSON format only mongoDB will convert it into BSON format and then Store it.

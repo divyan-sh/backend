@@ -1,0 +1,52 @@
+$ Data Modeling in MongoDB:
+
++ In MongoDB, data has a flexible schema. It is totally different from SQL database where you had to determine and declare a table's schema before inserting data. MongoDB collections do not enforce document structure.
+
++ The main challenge in data modeling is balancing the need of the application, the performance characteristics of the database engine, and the data retrieval patterns.
+
+# Consider the following things while designing the schema in MongoDB:
+  > Always design schema according to user requirements.
+  > Do join on write operations not on read operations.
+  > Objects which you want to use together, should be combined into one document. Otherwise they should be separated (make sure that there should not be need of joins).
+  > Optimize your schema for more frequent use cases.
+  > Do complex aggregation in the schema.
+  > You should duplicate the data but in a limit, because disc space is cheaper than compute time.
+
+? let us take an example of a client who needs a database design for his website. His website has the following requirements:
+  + Every post is distinct (contains unique title, description and url).
+  + Every post can have one or more tags.
+  + Every post has the name of its publisher and total number of likes.
+  + Each post can have zero or more comments and the comments must contain user name, message, data-time and likes.
+  -- For the above requirement, a minimum of three tables are required in RDBMS.
+  Table1:post
+  id    title      description     url      post_by     likes
+
+  Table2:tags
+  id    post_id     tags
+
+  Table3:comments
+  comment_id    post_id     by_user     message     date-time      likes
+
+  -- But in MongoDB, schema design will have one collection post AND each document represents one post and has the following structure:
+  Collection:POSTS 
+  [
+      {
+          _id: POST_ID,
+          title: TITLE_OF_POST,
+          description: DESCRIPTION_OF_POST,
+          url: URL_OF_POST,
+          postBy: BY_USER,
+          likes: LIKES_OF_POST,
+          tags: [tag1,tag2,tag3],
+          comments: [
+              {
+                  user: COMMENT_BY,
+                  message: COMMENT_MESSAGE,
+                  dateCreated: DATE&TIME_OF_COMMENT,
+                  like: LIKES_OF_COMMENT,
+              }
+          ] 
+      }
+  ]
+
+$ I hope you guys GET it...

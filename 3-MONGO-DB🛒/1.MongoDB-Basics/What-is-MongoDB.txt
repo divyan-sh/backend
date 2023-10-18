@@ -1,0 +1,88 @@
+$ MongoDb, is a NoSql Database for web apps..
+
+Ohkay got it so basically MongoDb is a database.. COOL
+But what is this NoSql and how it is different from most common use database the MySql...
+
+>> Ohkay Let me Explain You..
+
+There are too types of Database exist:
+-1. RDBMS: Relational Database Management System
+-2. NRDBMS: Non-Relational Database Management System
+
+The Difference between these two are as Follows: 
+# Relational Databases: is one that stores data in tables.
+  + remember that excel sheets, the excel sheets are more preferred to keep the record because it fits nicely into rows and columns.
+  + Hence from the excel sheets these Relational database are borned which store the data in rows and columns of a table.
+  + The relationship between each data point is clear and searching through those relationships is relatively easy.
+  + The relationship between tables and field types is called a schema.
+  Let’s look at an example:
+  >> Table:1
+  Name      Dry/Wet Food    GoodBoy(Y/N)
+  Fido      Dry             Y
+  Rex       Wet             N
+  Bubbles   Dry             Y
+  Cujo      Wet             N
+
+  >> Table:2
+  Tag#      Height(in)      Weight(lbs)
+  1573      15              21
+  1232      17              35
+  2311      14              23  
+  1245      18              30
+
+  >> Table:3
+  Tag#      Name        Breed       Color       Age
+  1573      Fido        Beagle      Brown/white 1.5
+  1232      Rex         Retriever   Black       2
+  2311      Bubbles     Rottweiler  Brown       5
+  1245      Cujo        Labra Dor   White       9
+
+  + Here we see three tables all providing unique information on a specific dog. A relational database user can then obtain a view of the database to fit their needs. For example, I might want to view or report on all dogs over 100 pounds. Or you may wish to see which breeds eat dry food. Relational databases make answering questions like these relatively easy.
+
+  + Relational databases are also called SQL databases. SQL stands for Structured Query Language and it’s the language relational databases are written in. SQL is used to execute queries, retrieve data, and edit data by updating, deleting, or creating new records.
+  >> Popular RDBMS: SQL Server, MySQL, PostgreSQL, etc
+
+# Non-Relational Database: A non-relational database is any database that does not use the tabular schema of rows and columns like in relational databases. Rather, its storage model is optimized for the type of data it’s storing.
+>> There are four different types of NoSQL databases.
+   -1.Document-oriented databases – Also known as a document store, this database is designed for storing, retrieving and managing document-oriented information. Document databases usually pair each key with a complex data structure (called a document).
+   
+   -2.Key-Value Stores – This is a database that uses different keys where each key is associated with only one value in a collection. Think of it as a dictionary. This is one of the simplest database types among NoSQL databases.
+   
+   -3.Wide-Column Stores – this database uses tables, rows, and columns, but unlike a relational database, the names and format of the columns can vary from row to row in the same table.
+   
+   -4.Graph Stores – A graph database uses graph structures for semantic queries with nodes, edges, and properties to represent and store data.
+   + Popular NRDBMS: MongoDB, Redis, 
+
+# To summarize the difference between the relational and non-relational databases: relational databases store data in rows and columns like a spreadsheet while non-relational databases store data don’t, using a storage model (one of four) that is best suited for the type of data it’s storing.
+
+>> Questions to Answer Before Choosing a Database:
+
+? What type of data will you be analyzing?
+  Does your data fit comfortably in rows and columns? Or is it better suited in a more flexible space? The answer will tell you whether you need a relational or non-relational database.
+
+? How much data are you dealing with?
+  A good rule of thumb is this – the bigger the data set, the more likely a non-relational database is a better fit. Non-relational databases can store unlimited sets of data with any type and have the flexibility to change the data type.
+  But relational databases work best when performing intensive read/write operations on small- or medium-sized data sets.
+
+? What kind of resources can you devote to the setup and maintenance of your database?
+  Here’s another good rule of thumb – the smaller your engineering team, the more likely a relational database is a better fit. Why? For one, relational databases take less time to manage. Also, SQL is a more well-known query language. It’s more likely your team already knows it.
+  Non-relational databases may require more programming knowledge – meaning your team may have to learn other types of query languages. Or you’ll need to hire someone with a code-heavier background.
+
+? Do you need real-time data?
+  There’s a serious buzz around real-time analytics. The competitive edge it brings and its impact on decision-making cannot be understated. However, it’s important to note that not every organization needs real-time data. Maybe your data doesn’t change that much. Maybe you’re more interested in analyzing past data sets. In that case, relational databases work well.
+
+
+I Hope now you Got Your Ans..
+If not Let me brief You..
+
+$ We are going to learn Mongo DB in next tutorials, SO MongoDb is a NoSQL Database or we can non relational database which does not store data in the form of rows and columns instead it stored data in document-oriented form..
+
+Note: Source: https://www.izenda.com/relational-vs-non-relational-databases/#:~:text=To%20summarize%20the%20difference%20between,type%20of%20data%20it's%20storing.
+
+$ History of MongoDB..
+  + MongoDB was developed by a NewYork based organization named 10gen which is now known as MongoDB Inc. It was initially developed as a PAAS (Platform as a Service). Later in 2009, it is introduced in the market as an open source database server that was maintained and supported by MongoDB Inc.
+  + MongoDB2.4.9 was the latest and stable version which was released on January 10, 2014.
+
+  ? what was the need of MongoDB although there were many databases in action?
+    > All the modern applications require big data, fast features development, flexible deployment, and the older database systems not competent enough, so the MongoDB was needed.
+    
