@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%-
+    include("./partials/nav.ejs",{home:true,create:false,read:false,update:false,del:false})
+    %>
+    <div class="container">
+      <h2 class="mt-3">PlayLists:Full Stack Web Developer</h2>
+      <% if (playlists.length>0) { %>
+      <div class="all-playList mt-3">
+        <% playlists.forEach((playlist)=>{ %>
+        <div class="card mt-2" id="<%= playlist._id %> ">
+          <h5 class="card-header"><%= playlist.author %></h5>
+          <div class="card-body">
+            <h5 class="card-title"><%= playlist.title %></h5>
+            <ul class="card-text">
+              <li>Course Type: <%= playlist.courseType %></li>
+              <li>Videos: <%= playlist.videos %></li>
+              <li>Level: <%= playlist.level %></li>
+              <li>Rating: <%= playlist.rating %>/5</li>
+            </ul>
+            <a href="<%= playlist.link %>" target="_blank" class="btn btn-dark"
+              >Go to Playlist</a
+            >
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <div class="mt-3 text-center"></div>
+      <% } else { %>
+      <div class="text-muted h2 text-center">No Playlist To Display -_-</div>
+      <% } %>
+    </div>
+    <!-- All Scripts... -->
+    <%- include("./partials/scripts.ejs",{script:"main"})%>
+  </body>
+</html>

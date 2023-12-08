@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%-
+    include("./partials/nav.ejs",{home:false,create:false,read:false,update:true,del:false})
+    %>
+    <div class="container">
+      <h2 class="mb-3 mt-3">Update Playlist</h2>
+      <p class="form-text">Search the playlist which you want to update</p>
+      <%- include("./partials/readForm.ejs")%>
+      <!-- Result of the Query -->
+      <p class="mb-3 mt-3 form-text result-text">
+        Your Search Result Will Be Appear Here...
+      </p>
+      <div class="form-check mb-2">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="update-options"
+          id="update-one"
+        />
+        <label class="form-check-label" for="update-one"> Update One </label>
+        <br />
+        <input
+          class="form-check-input"
+          type="radio"
+          name="update-options"
+          id="update-many"
+        />
+
+        <label class="form-check-label" for="update-many"> Update Many </label>
+        <br />
+        <input
+          class="form-check-input"
+          type="radio"
+          name="update-options"
+          id="update-all"
+        />
+        <label class="form-check-label" for="update-all"> Update All </label>
+      </div>
+      <div class="all-playlists mt-3 mb-3"></div>
+      <!-- Form to add New Data.. -->
+      <p class="form-text mt-3">Fill the fields which you want to update..</p>
+      <%- include("./partials/createForm.ejs",{btnText: "update"})%>
+    </div>
+    <!--  -->
+    <%- include("./partials/scripts.ejs",{script:"read&update"})%>
+  </body>
+</html>

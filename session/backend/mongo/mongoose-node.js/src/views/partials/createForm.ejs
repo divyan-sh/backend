@@ -1,0 +1,94 @@
+<form method="GET" action="/create-playlist" class="mb-3" id="create-form">
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control updated-inp"
+      name="author"
+      id="playlist-author"
+      placeholder="Author Name"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control updated-inp"
+      name="title"
+      id="playlist-title"
+      placeholder="Playlist Title"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control updated-inp"
+      name="courseType"
+      id="playlist-type"
+      placeholder="Playlist Type"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="number"
+      class="form-control updated-inp"
+      name="videos"
+      id="videos-count"
+      placeholder="No. of Videos"
+      min="1"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control updated-inp"
+      name="link"
+      id="playlist-link"
+      placeholder="Playlist Link"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      type="number"
+      class="form-control updated-inp"
+      name="rating"
+      id="playlist-rating"
+      placeholder="Rating out of 5"
+      min="0"
+      max="5"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="playlist-level" class="form-label">Level</label>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="levels"
+        id="level1"
+        value="Beginner"
+      />
+      <label class="form-check-label" for="level1"> Beginner</label>
+      <br />
+      <input
+        class="form-check-input"
+        type="radio"
+        name="levels"
+        id="level2"
+        value="Intermediate"
+      />
+      <label class="form-check-label" for="level2"> Intermediate</label>
+      <br />
+      <input
+        class="form-check-input"
+        type="radio"
+        name="levels"
+        id="level3"
+        value="Advanced"
+      />
+      <label class="form-check-label" for="level3"> Advanced</label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-dark <%= `${btnText}-btn` %>">
+    <%= btnText %>
+  </button>
+</form>
